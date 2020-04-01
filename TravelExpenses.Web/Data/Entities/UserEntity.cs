@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-//using TravelExpenses.Common.Enums;
+using TravelExpenses.Common.Enums;
 
 namespace TravelExpenses.Web.Data.Entities
 {
@@ -29,7 +29,7 @@ namespace TravelExpenses.Web.Data.Entities
         public string PicturePath { get; set; }
 
         [Display(Name = "User Type")]
-        //public UserType UserType { get; set; }
+        public UserType UserType { get; set; }
 
         public string FullName => $"{FirstName} {LastName}";
 

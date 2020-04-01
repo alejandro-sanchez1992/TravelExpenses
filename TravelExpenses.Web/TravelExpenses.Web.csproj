@@ -22,4 +22,9 @@
     <Folder Include="Controllers\API\" />
     <Folder Include="Data\Entities\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TravelExpenses.Common\TravelExpenses.Common.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+  </ItemGroup>
 </Project>
