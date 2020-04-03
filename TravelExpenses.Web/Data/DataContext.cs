@@ -10,6 +10,7 @@ namespace TravelExpenses.Web.Data
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
         }
+        public DbSet<EmployeeEntity> Employees { get; set; }
 
         public DbSet<TripEntity> Trips { get; set; }
 

@@ -36,5 +36,7 @@ namespace TravelExpenses.Web.Data.Entities
         public string FullNameWithDocument => $"{FirstName} {LastName} - {Document}";
 
         public ICollection<TripEntity> Trips { get; set; }
+
+        public ICollection<EmployeeEntity> Employees { get; set; }
     }
 }

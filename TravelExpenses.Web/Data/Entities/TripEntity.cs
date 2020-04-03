@@ -32,6 +32,8 @@ namespace TravelExpenses.Web.Data.Entities
 
         public UserEntity User { get; set; }
 
+        public EmployeeEntity Employee { get; set; }
+
         public CityEntity City { get; set; }
 
         public ICollection<TripDetailEntity> TripDetails { get; set; }
