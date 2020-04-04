@@ -22,6 +22,16 @@
     <Folder Include="Controllers\" />
     <Folder Include="Controllers\API\" />
     <Folder Include="Data\Entities\" />
+    <Folder Include="Views\Account\" />
+    <Folder Include="Views\Shared\" />
+    <Folder Include="wwwroot\assets\" />
+    <Folder Include="wwwroot\assets\css\" />
+    <Folder Include="wwwroot\assets\img\" />
+    <Folder Include="wwwroot\assets\js\" />
+    <Folder Include="wwwroot\assets\js\custom\" />
+    <Folder Include="wwwroot\assets\css\custom\" />
+    <Folder Include="Views\Shared\Layout\" />
+    <Folder Include="Models\Account\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TravelExpenses.Common\TravelExpenses.Common.csproj">

@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using TravelExpenses.Web.Data.Entities;
+using TravelExpenses.Web.Models.Account;
 
 namespace TravelExpenses.Web.Interfaces
 {
@@ -27,7 +28,7 @@ namespace TravelExpenses.Web.Interfaces
 
         Task<bool> IsUserInRoleAsync(UserEntity user, string roleName);
 
-        //Task<SignInResult> LoginAsync(LoginViewModel model);
+        Task<SignInResult> LoginAsync(LoginViewModel model);
 
         Task LogoutAsync();
 

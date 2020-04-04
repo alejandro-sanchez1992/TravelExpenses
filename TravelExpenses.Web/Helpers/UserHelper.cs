@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using TravelExpenses.Common.Enums;
 using TravelExpenses.Web.Data.Entities;
 using TravelExpenses.Web.Interfaces;
+using TravelExpenses.Web.Models.Account;
 
 namespace TravelExpenses.Web.Helpers
 {
@@ -121,14 +122,14 @@ namespace TravelExpenses.Web.Helpers
             return await _userManager.IsInRoleAsync(user, roleName);
         }
 
-        //public async Task<SignInResult> LoginAsync(LoginViewModel model)
-        //{
-        //    return await _signInManager.PasswordSignInAsync(
-        //        model.Username,
-        //        model.Password,
-        //        model.RememberMe,
-        //        false);
-        //}
+        public async Task<SignInResult> LoginAsync(LoginViewModel model)
+        {
+            return await _signInManager.PasswordSignInAsync(
+                model.Username,
+                model.Password,
+                model.RememberMe,
+                false);
+        }
 
         public async Task LogoutAsync()
         {
