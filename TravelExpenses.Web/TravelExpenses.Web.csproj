@@ -32,6 +32,10 @@
     <Folder Include="wwwroot\assets\css\custom\" />
     <Folder Include="Views\Shared\Layout\" />
     <Folder Include="Models\Account\" />
+    <Folder Include="Views\Home\" />
+    <Folder Include="Views\Trips\" />
+    <Folder Include="Views\Countries\" />
+    <Folder Include="Views\ExpenseType\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TravelExpenses.Common\TravelExpenses.Common.csproj">

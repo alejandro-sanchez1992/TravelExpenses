@@ -1,13 +1,16 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TravelExpenses.Web.Data;
 using TravelExpenses.Web.Models;
 
 namespace TravelExpenses.Web.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public class HomeController : Controller
+    public class HomeController : ApplicationBaseController
     {
+        public HomeController(DataContext context) : base(context) { }
+
         public IActionResult Index()
         {
             return View();

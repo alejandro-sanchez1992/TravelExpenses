@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Net;
+using System.Security.Claims;
+using System.Security.Principal;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using TravelExpenses.Common.Enums;
 using TravelExpenses.Web.Data.Entities;

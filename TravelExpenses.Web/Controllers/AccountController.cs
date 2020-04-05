@@ -7,14 +7,14 @@ using TravelExpenses.Web.Models.Account;
 
 namespace TravelExpenses.Web.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : ApplicationBaseController
     {
         private readonly IUserHelper _userHelper;
         private readonly DataContext _context;
 
         public AccountController(
             IUserHelper userHelper,
-            DataContext context)
+            DataContext context) : base(context)
         {
             _userHelper = userHelper;
             _context = context;
