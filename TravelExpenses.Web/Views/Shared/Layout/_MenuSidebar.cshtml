@@ -1,31 +1,35 @@
-﻿<!-- MENU SIDEBAR-->
+﻿@{
+    var controller = @ViewContext.RouteData.Values["controller"].ToString();
+
+}
+<!-- MENU SIDEBAR-->
 <aside class="menu-sidebar d-none d-lg-block">
     <div class="logo">
-        <a href="#">
-            <img src="~/assets/img/logo.png" alt="Cool Admin" />
+        <a asp-controller="Home" asp-action="Index" class="mx-auto">
+            <img src="~/assets/img/logo.png" alt="Cool Admin" style="height: 75px;" />
         </a>
     </div>
     <div class="menu-sidebar__content js-scrollbar1">
         <nav class="navbar-sidebar">
             <ul class="list-unstyled navbar__list">
-                <li class="active has-sub">
-                    <a class="js-arrow" href="#">
-                        <i class="fas fa-tachometer-alt"></i>Home
+                <li class="@(controller == "Home" ? "active" : "")">
+                    <a class="js-arrow" asp-controller="Home" asp-action="Index">
+                        <i class="fas fa-home"></i>Home
                     </a>
                 </li>
-                <li>
-                    <a href="chart.html">
-                        <i class="fas fa-chart-bar"></i>Users
+                <li class="@(controller == "Employee" ? "active" : "")">
+                    <a asp-controller="Employee" asp-action="Index">
+                        <i class="fas fa-users"></i>Employees
                     </a>
                 </li>
-                <li>
-                    <a href="table.html">
-                        <i class="fas fa-table"></i>Trips
+                <li class="@(controller == "ExpenseType" ? "active" : "")">
+                    <a asp-controller="ExpenseType" asp-action="Index">
+                        <i class="fas fa-tags"></i>Expenses Type
                     </a>
                 </li>
-                <li>
-                    <a href="table.html">
-                        <i class="fas fa-table"></i>Countries
+                <li class="@(controller == "Country" ? "active" : "")">
+                    <a asp-controller="Country" asp-action="Index">
+                        <i class="fas fa-flag"></i>Countries
                     </a>
                 </li>
             </ul>

@@ -34,8 +34,10 @@
     <Folder Include="Models\Account\" />
     <Folder Include="Views\Home\" />
     <Folder Include="Views\Trips\" />
-    <Folder Include="Views\Countries\" />
+    <Folder Include="Views\Country\" />
     <Folder Include="Views\ExpenseType\" />
+    <Folder Include="Views\Employee\" />
+    <Folder Include="Models\Country\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TravelExpenses.Common\TravelExpenses.Common.csproj">

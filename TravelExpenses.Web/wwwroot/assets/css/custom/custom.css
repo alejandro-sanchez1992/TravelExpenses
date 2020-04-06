@@ -1,0 +1,20 @@
+﻿.error-box {
+    height: 100%;
+    position: fixed;
+    width: 100%;
+    font-family: Rubik,sans-serif;
+    left: 0;
+    z-index: 9;
+    background: #f7f7f7;
+}
+
+.error-box .error-body {
+    padding-top: 5%;
+}
+
+.error-box .error-title {
+    font-size: 210px;
+    font-weight: 900;
+    text-shadow: 4px 4px 0 #fff, 6px 6px 0 #343a40;
+    line-height: 210px;
+}
