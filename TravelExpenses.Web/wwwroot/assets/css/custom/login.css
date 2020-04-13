@@ -21,6 +21,10 @@ body, html {
 	font-family: 'Lato', sans-serif;
 }
 
+.login .page-wrapper {
+    padding-bottom: 0;
+}
+
 /*---------------------------------------------*/
 a {
 	font-family: 'Lato', sans-serif;

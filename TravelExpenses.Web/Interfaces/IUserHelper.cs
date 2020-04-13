@@ -32,7 +32,7 @@ namespace TravelExpenses.Web.Interfaces
 
         Task LogoutAsync();
 
-        //Task<UserEntity> AddUserAsync(AddUserViewModel model, string path);
+        Task<UserEntity> AddUserAsync(AddUserViewModel model, string path);
 
         Task<IdentityResult> ChangePasswordAsync(UserEntity user, string oldPassword, string newPassword);
 
