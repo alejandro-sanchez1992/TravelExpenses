@@ -6,11 +6,11 @@ using TravelExpenses.Web.Models;
 
 namespace TravelExpenses.Web.Controllers
 {
-    [Authorize(Roles = "Admin")]
     public class HomeController : ApplicationBaseController
     {
         public HomeController(DataContext context) : base(context) { }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
             return View();

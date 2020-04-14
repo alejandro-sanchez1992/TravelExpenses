@@ -34,12 +34,28 @@
     <Folder Include="Models\Account\" />
     <Folder Include="Views\Home\" />
     <Folder Include="Views\Trips\" />
-    <Folder Include="Views\Countries\" />
+    <Folder Include="Views\Country\" />
     <Folder Include="Views\ExpenseType\" />
+    <Folder Include="Views\Employee\" />
+    <Folder Include="Models\Country\" />
+    <Folder Include="Resources\" />
+    <Folder Include="wwwroot\images\" />
+    <Folder Include="wwwroot\images\Users\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TravelExpenses.Common\TravelExpenses.Common.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Condition=" '$(EnableDefaultEmbeddedResourceItems)' == 'true' " Update="Resources\Resource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Resources\Resource.Designer.cs">
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

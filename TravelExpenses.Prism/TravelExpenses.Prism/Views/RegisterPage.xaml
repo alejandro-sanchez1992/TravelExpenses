@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="TravelExpenses.Prism.Views.RegisterPage"
+             xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+             xmlns:resources="clr-namespace:TravelExpenses.Prism.Resources"
+             xmlns:controls="clr-namespace:TravelExpenses.Prism.Controls;assembly=TravelExpenses.Prism"
+             BackgroundColor="{StaticResource ColorBackgroud}"
+             Title="{Binding Title}">
+
+    <AbsoluteLayout>
+        <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
+                     AbsoluteLayout.LayoutFlags="All"
+                     Padding="5">
+            <ScrollView>
+                <StackLayout Padding="20">
+                    <Label  HorizontalOptions="CenterAndExpand" 
+                                Text="Create Account"
+                                FontAttributes="Bold"
+                                FontSize="Title"
+                                Margin="0,0,0,20"/>
+
+                    <ffimageloading:CachedImage
+                        Aspect="AspectFit"
+                        Source="{Binding Image}"
+                        CacheDuration= "50"
+                        HeightRequest="150"
+                        Margin="5"
+                        RetryCount= "3"
+                        RetryDelay= "600">
+
+                        <ffimageloading:CachedImage.Transformations>
+                            <fftransformations:CircleTransformation />
+                        </ffimageloading:CachedImage.Transformations>
+                        <ffimageloading:CachedImage.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ChangeImageCommand}"/>
+                        </ffimageloading:CachedImage.GestureRecognizers>
+
+                    </ffimageloading:CachedImage>
+
+                    <controls:ImageEntry
+                            TextColor="#979797"
+                            LineColor="#e6e6e6"
+                            ImageWidth="25"
+                            ImageHeight="24"
+                            Image="ic_dni"
+                            Keyboard="Numeric"
+                            Placeholder="{x:Static resources:Resource.DocumentPlaceHolder}"
+                            Text="{Binding User.Document}"
+                            HorizontalOptions="FillAndExpand"/>
+
+                    <controls:ImageEntry
+                            TextColor="#979797"
+                            LineColor="#e6e6e6"
+                            ImageWidth="25"
+                            ImageHeight="25"
+                            Image="ic_user"
+                            Placeholder="{x:Static resources:Resource.FirstNamePlaceHolder}"
+                            Text="{Binding User.FirstName}"
+                            HorizontalOptions="FillAndExpand"/>
+
+                    <controls:ImageEntry
+                            TextColor="#979797"
+                            LineColor="#e6e6e6"
+                            ImageWidth="25"
+                            ImageHeight="25"
+                            Image="ic_user"
+                            Placeholder="{x:Static resources:Resource.LastNamePlaceHolder}"
+                            Text="{Binding User.LastName}"
+                            HorizontalOptions="FillAndExpand"/>
+
+                    <controls:ImageEntry
+                            TextColor="#979797"
+                            LineColor="#e6e6e6"
+                            ImageWidth="25"
+                            ImageHeight="25"
+                            Image="ic_location"
+                            Placeholder="{x:Static resources:Resource.AddressPlaceHolder}"
+                            Text="{Binding User.Address}"
+                            HorizontalOptions="FillAndExpand"/>
+
+                    <controls:ImageEntry
+                            TextColor="#979797"
+                            LineColor="#e6e6e6"
+                            ImageWidth="25"
+                            ImageHeight="22"
+                            Image="email"
+                            Keyboard="Email"
+                            Placeholder="{x:Static resources:Resource.EmailPlaceHolder}"
+                            Text="{Binding User.Email}"
+                            HorizontalOptions="FillAndExpand"/>
+
+                    <controls:ImageEntry
+                            TextColor="#979797"
+                            LineColor="#e6e6e6"
+                            ImageWidth="28"
+                            ImageHeight="25"
+                            Image="ic_phone"
+                            Keyboard="Telephone"
+                            Placeholder="{x:Static resources:Resource.PhonePlaceHolder}"
+                            Text="{Binding User.PhoneNumber}"
+                            HorizontalOptions="FillAndExpand"/>
+
+                    <controls:ImageEntry
+                            TextColor="#979797"
+                            LineColor="#e6e6e6"
+                            ImageWidth="25"
+                            ImageHeight="22"
+                            Image="password"
+                            IsPassword="True"
+                            Placeholder="{x:Static resources:Resource.PasswordPlaceHolder}"
+                            Text="{Binding User.Password}"
+                            HorizontalOptions="FillAndExpand"/>
+
+                    <controls:ImageEntry
+                            TextColor="#979797"
+                            LineColor="#e6e6e6"
+                            ImageWidth="25"
+                            ImageHeight="22"
+                            Image="password"
+                            IsPassword="True"
+                            Placeholder="{x:Static resources:Resource.PasswordConfirmPlaceHolder}"
+                            Text="{Binding User.PasswordConfirm}"
+                            HorizontalOptions="FillAndExpand"/>
+
+                        <Picker ItemDisplayBinding="{Binding Name}"
+                                ItemsSource="{Binding Roles}"
+                                SelectedItem="{Binding Role}"
+                                Title="{x:Static resources:Resource.RegisterAsPlaceHolder}">
+                        </Picker>
+
+                </StackLayout>
+            </ScrollView>
+            <controls:GradientButton
+                Margin="20,10"
+                BorderRadius="40"
+                HeightRequest="65"
+                EndColor="#FCA741"
+                HorizontalOptions="FillAndExpand"
+                StartColor="#FDDA51"
+                Text="{x:Static resources:Resource.Register}"
+                Command="{Binding RegisterCommand}"
+                IsEnabled="{Binding IsEnabled}"
+                TextColor="White"
+                controls:ViewEffects.HasShadow="True" 
+                controls:ViewEffects.ShadowColor="#222222" 
+                controls:ViewEffects.ShadowSize="4" />
+        </StackLayout>
+        <busyindicator:SfBusyIndicator
+            AnimationType="Ball"
+            AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
+            AbsoluteLayout.LayoutFlags="All"
+            BackgroundColor="#fff"
+            HorizontalOptions="Center"
+            TextColor="#000"
+            IsVisible="{Binding IsRunning}"
+            Title="{x:Static resources:Resource.Loading}"
+            VerticalOptions="Center"
+            ViewBoxWidth="80"
+            ViewBoxHeight="80" />
+    </AbsoluteLayout>
+</ContentPage>

@@ -1,4 +1,8 @@
-﻿<!-- HEADER MOBILE-->
+﻿@{
+    var controller = @ViewContext.RouteData.Values["controller"].ToString();
+
+}
+<!-- HEADER MOBILE-->
 <header class="header-mobile d-block d-lg-none">
     <div class="header-mobile__bar">
         <div class="container-fluid">
@@ -17,24 +21,24 @@
     <nav class="navbar-mobile">
         <div class="container-fluid">
             <ul class="navbar-mobile__list list-unstyled">
-                <li class="has-sub">
-                    <a class="js-arrow" href="#">
-                        <i class="fas fa-tachometer-alt"></i>Home
+                <li class="@(controller == "Home" ? "active" : "")">
+                    <a class="js-arrow" asp-controller="Home" asp-action="Index">
+                        <i class="fas fa-home"></i>Home
                     </a>
                 </li>
-                <li>
-                    <a href="chart.html">
-                        <i class="fas fa-chart-bar"></i>Users
+                <li class="@(controller == "Employee" ? "active" : "")">
+                    <a asp-controller="Employee" asp-action="Index">
+                        <i class="fas fa-users"></i>Employees
                     </a>
                 </li>
-                <li>
-                    <a href="table.html">
-                        <i class="fas fa-table"></i>Trips
+                <li class="@(controller == "ExpenseType" ? "active" : "")">
+                    <a asp-controller="ExpenseType" asp-action="Index">
+                        <i class="fas fa-tags"></i>Expenses Type
                     </a>
                 </li>
-                <li>
-                    <a href="map.html">
-                        <i class="fas fa-map-marker-alt"></i>Countries
+                <li class="@(controller == "Country" ? "active" : "")">
+                    <a asp-controller="Country" asp-action="Index">
+                        <i class="fas fa-flag"></i>Countries
                     </a>
                 </li>
             </ul>
