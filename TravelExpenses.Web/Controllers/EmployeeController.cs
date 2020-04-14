@@ -131,22 +131,23 @@ namespace TravelExpenses.Web.Controllers
                 return NotFound();
             }
 
-            var owner = await _context.Employees
+            var employee = await _context.Employees
                 .Include(o => o.User)
                 .FirstOrDefaultAsync(o => o.Id == id.Value);
-            if (owner == null)
+            if (employee == null)
             {
                 return NotFound();
             }
 
             var model = new EditUserViewModel
             {
-                Address = owner.User.Address,
-                Document = owner.User.Document,
-                FirstName = owner.User.FirstName,
-                Id = owner.Id,
-                LastName = owner.User.LastName,
-                PhoneNumber = owner.User.PhoneNumber
+                Address = employee.User.Address,
+                Document = employee.User.Document,
+                FirstName = employee.User.FirstName,
+                Id = employee.Id,
+                LastName = employee.User.LastName,
+                PhoneNumber = employee.User.PhoneNumber,
+                PicturePath = employee.User.PicturePath
             };
 
             return View(model);
@@ -158,17 +159,25 @@ namespace TravelExpenses.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var owner = await _context.Employees
+                string path = model.PicturePath;
+
+                if (model.PictureFile != null)
+                {
+                    path = await _imageHelper.UploadImageAsync(model.PictureFile, "Users");
+                }
+
+                var employee = await _context.Employees
                     .Include(o => o.User)
                     .FirstOrDefaultAsync(o => o.Id == model.Id);
 
-                owner.User.Document = model.Document;
-                owner.User.FirstName = model.FirstName;
-                owner.User.LastName = model.LastName;
-                owner.User.Address = model.Address;
-                owner.User.PhoneNumber = model.PhoneNumber;
+                employee.User.Document = model.Document;
+                employee.User.FirstName = model.FirstName;
+                employee.User.LastName = model.LastName;
+                employee.User.Address = model.Address;
+                employee.User.PhoneNumber = model.PhoneNumber;
+                employee.User.PicturePath = path;
 
-                await _userHelper.UpdateUserAsync(owner.User);
+                await _userHelper.UpdateUserAsync(employee.User);
                 return RedirectToAction(nameof(Index));
             }
 

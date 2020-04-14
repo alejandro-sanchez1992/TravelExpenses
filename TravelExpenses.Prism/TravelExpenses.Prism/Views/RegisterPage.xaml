@@ -102,7 +102,7 @@
                             Image="ic_phone"
                             Keyboard="Telephone"
                             Placeholder="{x:Static resources:Resource.PhonePlaceHolder}"
-                            Text="{Binding User.Phone}"
+                            Text="{Binding User.PhoneNumber}"
                             HorizontalOptions="FillAndExpand"/>
 
                     <controls:ImageEntry

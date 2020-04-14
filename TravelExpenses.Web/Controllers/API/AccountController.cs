@@ -77,7 +77,7 @@ namespace TravelExpenses.Web.Controllers.API
                 Email = request.Email,
                 FirstName = request.FirstName,
                 LastName = request.LastName,
-                PhoneNumber = request.Phone,
+                PhoneNumber = request.PhoneNumber,
                 UserName = request.Email,
                 PicturePath = picturePath,
                 UserType = request.UserTypeId == 1 ? UserType.Employee : UserType.Admin
@@ -91,6 +91,12 @@ namespace TravelExpenses.Web.Controllers.API
 
             UserEntity userNew = await _userHelper.GetUserAsync(request.Email);
             await _userHelper.AddUserToRoleAsync(userNew, user.UserType.ToString());
+
+            if (request.UserTypeId == 1)
+            {
+                _dataContext.Employees.Add(new EmployeeEntity { User = user });
+                await _dataContext.SaveChangesAsync();
+            }
 
             string myToken = await _userHelper.GenerateEmailConfirmationTokenAsync(user);
             string tokenLink = Url.Action("ConfirmEmail", "Account", new
@@ -175,8 +181,8 @@ namespace TravelExpenses.Web.Controllers.API
             userEntity.FirstName = request.FirstName;
             userEntity.LastName = request.LastName;
             userEntity.Address = request.Address;
-            userEntity.PhoneNumber = request.Phone;
-            userEntity.Document = request.Phone;
+            userEntity.PhoneNumber = request.PhoneNumber;
+            userEntity.Document = request.Document;
             userEntity.PicturePath = picturePath;
 
             IdentityResult respose = await _userHelper.UpdateUserAsync(userEntity);

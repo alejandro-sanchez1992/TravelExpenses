@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using TravelExpenses.Common.Enums;
 using TravelExpenses.Web.Data;
 using TravelExpenses.Web.Data.Entities;
 using TravelExpenses.Web.Interfaces;
@@ -261,6 +262,17 @@ namespace TravelExpenses.Web.Controllers
                     return View(model);
                 }
 
+                if(model.UserTypeId == (int) UserType.Employee)
+                {
+                    var employee = new EmployeeEntity
+                    {
+                        User = user,
+                    };
+
+                    _context.Employees.Add(employee);
+                    await _context.SaveChangesAsync();
+                }
+
                 var myToken = await _userHelper.GenerateEmailConfirmationTokenAsync(user);
                 var tokenLink = Url.Action("ConfirmEmail", "Account", new
                 {
@@ -272,6 +284,7 @@ namespace TravelExpenses.Web.Controllers
                     $"<h1>Email Confirmation</h1>" +
                     $"To allow the user, " +
                     $"plase click in this link:</br></br><a href = \"{tokenLink}\">Confirm Email</a>");
+
                 if (response.IsSuccess)
                 {
                     ViewBag.Message = "The instructions to allow your user has been sent to email.";

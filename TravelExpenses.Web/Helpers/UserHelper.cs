@@ -80,7 +80,7 @@ namespace TravelExpenses.Web.Helpers
                 PicturePath = path,
                 PhoneNumber = model.PhoneNumber,
                 UserName = model.Username,
-                UserType = model.UserTypeId == 1 ? UserType.Admin : UserType.Employee
+                UserType = model.UserTypeId == 1 ? UserType.Employee : UserType.Admin
             };
 
             IdentityResult result = await _userManager.CreateAsync(userEntity, model.Password);

@@ -99,8 +99,8 @@ namespace TravelExpenses.Prism.ViewModels
                 Email = User.Email,
                 FirstName = User.FirstName,
                 LastName = User.LastName,
-                Password = "1234567", // It doesn't matter what is sent here. It is only for the model to be valid
-                Phone = User.PhoneNumber,
+                Password = "123456", // It doesn't matter what is sent here. It is only for the model to be valid
+                PhoneNumber = User.PhoneNumber,
                 PictureArray = imageArray,
                 UserTypeId = User.UserType == UserType.Employee ? 1 : 2,
                 CultureInfo = Languages.Culture
@@ -120,7 +120,7 @@ namespace TravelExpenses.Prism.ViewModels
             }
 
             Settings.User = JsonConvert.SerializeObject(User);
-            //MainMasterDetailPageViewModel.GetInstance().ReloadUser();
+            MainMasterDetailPageViewModel.GetInstance().ReloadUser();
             await App.Current.MainPage.DisplayAlert(Languages.Ok, Languages.UserUpdated, Languages.Accept);
         }
 
@@ -183,7 +183,11 @@ namespace TravelExpenses.Prism.ViewModels
                     {
                         Directory = "Sample",
                         Name = "test.jpg",
+                        SaveToAlbum = true,
+                        CompressionQuality = 75,
+                        CustomPhotoSize = 50,
                         PhotoSize = PhotoSize.Small,
+                        DefaultCamera = CameraDevice.Front
                     }
                 );
             }

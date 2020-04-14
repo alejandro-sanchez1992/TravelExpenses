@@ -209,7 +209,7 @@ namespace TravelExpenses.Prism.ViewModels
                 return false;
             }
 
-            if (string.IsNullOrEmpty(User.Phone))
+            if (string.IsNullOrEmpty(User.PhoneNumber))
             {
                 await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.PhoneError, Languages.Accept);
                 return false;

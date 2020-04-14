@@ -69,7 +69,7 @@ namespace TravelExpenses.Prism.ViewModels
 
         private async void ModifyUserAsync()
         {
-            await _navigationService.NavigateAsync($"/MainMasterDetailPageViewModel/NavigationPage/{nameof(ModifyUserPage)}");
+            await _navigationService.NavigateAsync($"/MainMasterDetailPage/NavigationPage/{nameof(ModifyUserPage)}");
         }
 
         private void LoadUser()

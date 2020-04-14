@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using TravelExpenses.Web.Data;
 using TravelExpenses.Web.Data.Entities;
@@ -99,9 +100,9 @@ namespace TravelExpenses.Web
                 app.UseHsts();
             }
 
+            app.UseStaticFiles();
             app.UseStatusCodePagesWithReExecute("/error/{0}");
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
             app.UseAuthentication();
             app.UseCookiePolicy();
 

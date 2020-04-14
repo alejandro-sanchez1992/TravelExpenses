@@ -28,7 +28,7 @@ namespace TravelExpenses.Common.Models
         public string FullNameWithDocument => $"{FirstName} {LastName} - {Document}";
 
         public string PictureFullPath => string.IsNullOrEmpty(PicturePath)
-            ? ""
-            : $"https://TaxiWeb3.azurewebsites.net{PicturePath.Substring(1)}";
+            ? "https://travelexpensesweb.azurewebsites.net/images/noimage.png"
+            : $"https://travelexpensesweb.azurewebsites.net{PicturePath}";
     }
 }

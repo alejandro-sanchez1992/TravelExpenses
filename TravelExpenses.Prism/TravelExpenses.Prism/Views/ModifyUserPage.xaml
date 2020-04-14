@@ -5,6 +5,7 @@
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              xmlns:resources="clr-namespace:TravelExpenses.Prism.Resources"
+             xmlns:controls="clr-namespace:TravelExpenses.Prism.Controls" xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="TravelExpenses.Prism.Views.ModifyUserPage"
              BackgroundColor="{StaticResource ColorBackgroud}"
@@ -14,97 +15,104 @@
         <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
                      AbsoluteLayout.LayoutFlags="All"
                      Padding="5">
+
             <ScrollView>
-                <StackLayout>
-                    <ffimageloading:CachedImage Aspect="AspectFit"
-                                                Source="{Binding Image}" 
-                                                CacheDuration= "50"
-                                                HeightRequest="150"
-                                                Margin="5"
-                                                RetryCount= "3"
-                                                RetryDelay= "600">
+                <StackLayout Padding="20">
+                    <ffimageloading:CachedImage
+                        Aspect="AspectFit"
+                        Source="{Binding Image}"
+                        CacheDuration= "50"
+                        HeightRequest="150"
+                        Margin="5"
+                        RetryCount= "3"
+                        RetryDelay= "600">
+
                         <ffimageloading:CachedImage.Transformations>
                             <fftransformations:CircleTransformation />
                         </ffimageloading:CachedImage.Transformations>
+
                         <ffimageloading:CachedImage.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding ChangeImageCommand}"/>
                         </ffimageloading:CachedImage.GestureRecognizers>
+
                     </ffimageloading:CachedImage>
 
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="3*"/>
-                        </Grid.ColumnDefinitions>
+                    <controls:ImageEntry
+                            TextColor="#979797"
+                            LineColor="#e6e6e6"
+                            ImageWidth="25"
+                            ImageHeight="24"
+                            Image="ic_dni"
+                            Keyboard="Numeric"
+                            Placeholder="{x:Static resources:Resource.DocumentPlaceHolder}"
+                            Text="{Binding User.Document}"
+                            HorizontalOptions="FillAndExpand"/>
 
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
+                    <controls:ImageEntry
+                            TextColor="#979797"
+                            LineColor="#e6e6e6"
+                            ImageWidth="25"
+                            ImageHeight="25"
+                            Image="ic_user"
+                            Placeholder="{x:Static resources:Resource.FirstNamePlaceHolder}"
+                            Text="{Binding User.FirstName}"
+                            HorizontalOptions="FillAndExpand"/>
 
-                        <Label Grid.Row="0"
-                               Grid.Column="0"
-                               Text="{x:Static resources:Resource.Document}"
-                               VerticalOptions="Center"/>
-                        <Entry Grid.Row="0"
-                               Grid.Column="1"
-                               Keyboard="Numeric"
-                               Placeholder="{x:Static resources:Resource.DocumentPlaceHolder}"
-                               Text="{Binding User.Document}"/>
+                    <controls:ImageEntry
+                            TextColor="#979797"
+                            LineColor="#e6e6e6"
+                            ImageWidth="25"
+                            ImageHeight="25"
+                            Image="ic_user"
+                            Placeholder="{x:Static resources:Resource.LastNamePlaceHolder}"
+                            Text="{Binding User.LastName}"
+                            HorizontalOptions="FillAndExpand"/>
 
-                        <Label Grid.Row="1"
-                               Grid.Column="0"
-                               Text="{x:Static resources:Resource.FirstName}"
-                               VerticalOptions="Center"/>
-                        <Entry Grid.Row="1"
-                               Grid.Column="1"
-                               Placeholder="{x:Static resources:Resource.FirstNamePlaceHolder}"
-                               Text="{Binding User.FirstName}"/>
+                    <controls:ImageEntry
+                            TextColor="#979797"
+                            LineColor="#e6e6e6"
+                            ImageWidth="25"
+                            ImageHeight="25"
+                            Image="ic_location"
+                            Placeholder="{x:Static resources:Resource.AddressPlaceHolder}"
+                            Text="{Binding User.Address}"
+                            HorizontalOptions="FillAndExpand"/>
 
-                        <Label Grid.Row="2"
-                               Grid.Column="0"
-                               Text="{x:Static resources:Resource.LastName}"
-                               VerticalOptions="Center"/>
-                        <Entry Grid.Row="2"
-                               Grid.Column="1"
-                               Placeholder="{x:Static resources:Resource.LastNamePlaceHolder}"
-                               Text="{Binding User.LastName}"/>
-
-                        <Label Grid.Row="3"
-                               Grid.Column="0"
-                               Text="{x:Static resources:Resource.Address}"
-                               VerticalOptions="Center"/>
-                        <Entry Grid.Row="3"
-                               Grid.Column="1"
-                               Placeholder="{x:Static resources:Resource.AddressPlaceHolder}"
-                               Text="{Binding User.Address}"/>
-
-                        <Label Grid.Row="4"
-                               Grid.Column="0"
-                               Text="{x:Static resources:Resource.Phone}"
-                               VerticalOptions="Center"/>
-                        <Entry Grid.Row="4" 
-                               Grid.Column="1"
-                               Keyboard="Telephone"
-                               Placeholder="{x:Static resources:Resource.PhonePlaceHolder}"
-                               Text="{Binding User.PhoneNumber}"/>
-                    </Grid>
+                    <controls:ImageEntry
+                            TextColor="#979797"
+                            LineColor="#e6e6e6"
+                            ImageWidth="28"
+                            ImageHeight="25"
+                            Image="ic_phone"
+                            Keyboard="Telephone"
+                            Placeholder="{x:Static resources:Resource.PhonePlaceHolder}"
+                            Text="{Binding User.PhoneNumber}"
+                            HorizontalOptions="FillAndExpand"/>
                 </StackLayout>
+
             </ScrollView>
-            <StackLayout Orientation="Horizontal"
-                         VerticalOptions="EndAndExpand">
-                <Button Command="{Binding SaveCommand}"
-                        IsEnabled="{Binding IsEnabled}"
-                        Text="{x:Static resources:Resource.Save}"/>
-                <Button Command="{Binding ChangePasswordCommand}"
-                        IsEnabled="{Binding IsEnabled}"
-                        Text="{x:Static resources:Resource.ChangePassword}"
-                        Style="{StaticResource DangerButton}"/>
-            </StackLayout>
+
+            <Button Command="{Binding SaveCommand}"
+                    IsEnabled="{Binding IsEnabled}"
+                    Text="{x:Static resources:Resource.Save}"/>
+
+            <Button Command="{Binding ChangePasswordCommand}"
+                    IsEnabled="{Binding IsEnabled}"
+                    Text="{x:Static resources:Resource.ChangePassword}" />
+
         </StackLayout>
+        <busyindicator:SfBusyIndicator
+            AnimationType="Ball"
+            AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
+            AbsoluteLayout.LayoutFlags="All"
+            BackgroundColor="#fff"
+            HorizontalOptions="Center"
+            TextColor="#000"
+            IsVisible="{Binding IsRunning}"
+            Title="{x:Static resources:Resource.Loading}"
+            VerticalOptions="Center"
+            ViewBoxWidth="80"
+            ViewBoxHeight="80" />
     </AbsoluteLayout>
 
 </ContentPage>

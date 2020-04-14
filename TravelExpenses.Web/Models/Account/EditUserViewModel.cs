@@ -34,6 +34,11 @@ namespace TravelExpenses.Web.Models.Account
         public IFormFile PictureFile { get; set; }
 
         [Display(Name = "Picture")]
+        public string PictureFullPath => string.IsNullOrEmpty(PicturePath)
+            ? "https://travelexpensesweb.azurewebsites.net/images/noimage.png"
+            : $"{PicturePath}";
+
+        [Display(Name = "Picture")]
         public string PicturePath { get; set; }
     }
 }

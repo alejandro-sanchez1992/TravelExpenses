@@ -26,6 +26,7 @@
     <PackageReference Include="Syncfusion.Xamarin.SfBusyIndicator" Version="18.1.0.43" />
     <PackageReference Include="Syncfusion.Xamarin.Core" Version="18.1.0.43" />
     <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
+    <PackageReference Include="Plugin.Toast" Version="2.1.2" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />

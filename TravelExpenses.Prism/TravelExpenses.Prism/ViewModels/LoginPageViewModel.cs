@@ -8,6 +8,8 @@ using TravelExpenses.Common.Models;
 using TravelExpenses.Common.Helpers;
 using TravelExpenses.Prism.Helpers;
 using TravelExpenses.Prism.Views;
+using Plugin.Toast;
+using Plugin.Toast.Abstractions;
 
 namespace TravelExpenses.Prism.ViewModels
 {
@@ -21,6 +23,7 @@ namespace TravelExpenses.Prism.ViewModels
         private DelegateCommand _loginCommand;
         private DelegateCommand _registerCommand;
         private DelegateCommand _forgotPasswordCommand;
+        private ToastLength _toastLength = ToastLength.Short;
 
         public LoginPageViewModel(INavigationService navigationService, IApiService apiService)
             : base(navigationService)
@@ -66,19 +69,13 @@ namespace TravelExpenses.Prism.ViewModels
         {
             if (string.IsNullOrEmpty(Email))
             {
-                await App.Current.MainPage.DisplayAlert(
-                    Languages.Error,
-                    Languages.EmailError,
-                    Languages.Accept);
+                CrossToastPopUp.Current.ShowToastError(Languages.EmailError, _toastLength);
                 return;
             }
 
             if (string.IsNullOrEmpty(Password))
             {
-                await App.Current.MainPage.DisplayAlert(
-                    Languages.Error,
-                    Languages.PasswordError,
-                    Languages.Accept);
+                CrossToastPopUp.Current.ShowToastError(Languages.PasswordError, _toastLength);
                 return;
             }
 
