@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+                  prism:ViewModelLocator.AutowireViewModel="True"
+                  xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+                  ios:Page.UseSafeArea="true"
+                  xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                  xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+                  x:Class="TravelExpenses.Prism.Views.MainMasterDetailPage"
+                  BackgroundColor="#cccccc">
+
+    <MasterDetailPage.Master>
+        <ContentPage
+            Title="Menu">
+            <ContentPage.Padding>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="Android, UWP">0</On>
+                    <On Platform="iOS">0,20,0,0</On>
+                </OnPlatform>
+            </ContentPage.Padding>
+            <StackLayout>
+                <StackLayout
+                    VerticalOptions="CenterAndExpand"
+                    Padding="0,10,0,20"
+                    BackgroundColor="#FCA741">
+
+                    <ffimageloading:CachedImage
+                        x:Name="Picture"
+                        Source="{Binding User.PictureFullPath}"
+                        CacheDuration= "50"
+                        HeightRequest="100"
+                        Margin="5"
+                        RetryCount= "3"
+                        RetryDelay= "600"
+                        WidthRequest="100">
+
+                        <ffimageloading:CachedImage.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ModifyUserCommand}"/>
+                        </ffimageloading:CachedImage.GestureRecognizers>
+
+                        <ffimageloading:CachedImage.Transformations>
+                            <fftransformations:CircleTransformation />
+                        </ffimageloading:CachedImage.Transformations>
+
+                    </ffimageloading:CachedImage>
+
+                    <Label Text="{Binding User.FirstName}"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           FontSize="22"
+                           TextColor="White" />
+                    <Label Text="{Binding User.LastName}"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           FontFamily=""
+                           FontSize="15"
+                           TextColor="White" />
+
+                </StackLayout>
+                <ScrollView>
+                    <StackLayout>
+                        <Label Text="Información"
+                               Padding="10"
+                               TextColor="#090909"
+                               FontSize="18"
+                               FontAttributes="Bold"/>
+                        <ListView
+                            BackgroundColor="Transparent"
+                            ItemsSource="{Binding Menus}"
+                            HasUnevenRows="True"
+                            SeparatorVisibility="None">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Frame
+                                            Margin=".5"
+                                            BackgroundColor="#fff">
+
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding SelectMenuCommand}"/>
+                                            </Frame.GestureRecognizers>
+
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <Image
+                                                    Grid.Column="0"
+                                                    HeightRequest="20"
+                                                    Margin="0,0,5,0"
+                                                    Source="{Binding Icon}"
+                                                    WidthRequest="20"/>
+
+                                                <StackLayout 
+                                                    Grid.Column="1"
+                                                    VerticalOptions="Center">
+                                                    <Label
+                                                        Grid.Column="1"
+                                                        FontAttributes="Bold"
+                                                        VerticalOptions="Center"
+                                                        Text="{Binding Title}"/>
+                                                </StackLayout>
+                                                <Image 
+                                                    Grid.Column="2"
+                                                    WidthRequest="30"
+                                                    HeightRequest="20"
+                                                    HorizontalOptions="End" 
+                                                    Source="ic_chevron_right">
+                                                </Image>
+                                            </Grid>
+                                        </Frame>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
+                </ScrollView>
+            </StackLayout>
+        </ContentPage>
+    </MasterDetailPage.Master>
+
+</MasterDetailPage>

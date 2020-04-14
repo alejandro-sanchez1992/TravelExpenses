@@ -63,7 +63,7 @@ namespace TravelExpenses.Web.Controllers
                 {
                     if (ex.InnerException.Message.Contains("duplicate"))
                     {
-                        ModelState.AddModelError(string.Empty, "Already exists a taxi with the same plaque.");
+                        ModelState.AddModelError(string.Empty, "Already exists a expense with the same name.");
                     }
                     else
                     {

@@ -1,8 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var controller = @ViewContext.RouteData.Values["action"].ToString();
+}
+
+<!DOCTYPE html>
 <html>
 <partial name="Layout/_Head" />
 
-<body class="animsition">
+<body class="animsition @(controller == "Login" ? "login" : "")">
     <div class="page-wrapper">
 
         <partial name="_CookieConsentPartial" />

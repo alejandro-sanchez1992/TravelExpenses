@@ -1,0 +1,261 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>2.0</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="Error" xml:space="preserve">
+        <value>Error</value>
+    </data>
+    <data name="Accept" xml:space="preserve">
+        <value>Aceptar</value>
+    </data>
+    <data name="TaxiHistory" xml:space="preserve">
+        <value>Historia del taxi</value>
+    </data>
+    <data name="PlaqueError1" xml:space="preserve">
+        <value>Debes entrar en una placa.</value>
+    </data>
+    <data name="PlaqueError2" xml:space="preserve">
+        <value>La placa debe comenzar con tres letras y terminar con tres números.</value>
+    </data>
+    <data name="ConnectionError" xml:space="preserve">
+        <value>Compruebe la conexión a Internet</value>
+    </data>
+    <data name="Plaque" xml:space="preserve">
+        <value>Placa</value>
+    </data>
+    <data name="PlaquePlaceHolder" xml:space="preserve">
+        <value>ABC123</value>
+    </data>
+    <data name="CheckPlaque" xml:space="preserve">
+        <value>Comprobar placa</value>
+    </data>
+    <data name="Qualification" xml:space="preserve">
+        <value>Calificación</value>
+    </data>
+    <data name="NumberOfTrips" xml:space="preserve">
+        <value>Número de Viajes</value>
+    </data>
+    <data name="Driver" xml:space="preserve">
+        <value>Conductor</value>
+    </data>
+    <data name="Employee" xml:space="preserve">
+        <value>Empleado</value>
+    </data>
+    <data name="StartDate" xml:space="preserve">
+        <value>Fecha de inicio</value>
+    </data>
+    <data name="Score" xml:space="preserve">
+        <value>*</value>
+    </data>
+    <data name="Remarks" xml:space="preserve">
+        <value>Notas</value>
+    </data>
+    <data name="Loading" xml:space="preserve">
+        <value>Cargando...</value>
+    </data>
+    <data name="StartTrip" xml:space="preserve">
+        <value>Iniciar viaje</value>
+    </data>
+    <data name="NewTrip" xml:space="preserve">
+        <value>Nuevo Viaje</value>
+    </data>
+    <data name="SeeTaxiHistory" xml:space="preserve">
+        <value>Ver historial de taxis</value>
+    </data>
+    <data name="AdminMyUserGroup" xml:space="preserve">
+        <value>Admin mi grupo de usuarios</value>
+    </data>
+    <data name="ModifyUser" xml:space="preserve">
+        <value>Modificar usuario</value>
+    </data>
+    <data name="ReportAnIncident" xml:space="preserve">
+        <value>Informar incidencia</value>
+    </data>
+    <data name="LogIn" xml:space="preserve">
+        <value>Iniciar sesión</value>
+    </data>
+    <data name="Email" xml:space="preserve">
+        <value>Email</value>
+    </data>
+    <data name="EmailPlaceHolder" xml:space="preserve">
+        <value>Ingresa tu email...</value>
+    </data>
+    <data name="EmailError" xml:space="preserve">
+        <value>Debes ingresar un correo electrónico...</value>
+    </data>
+    <data name="Password" xml:space="preserve">
+        <value>Contraseña</value>
+    </data>
+    <data name="PasswordPlaceHolder" xml:space="preserve">
+        <value>Ingresa tu contraseña...</value>
+    </data>
+    <data name="PasswordError" xml:space="preserve">
+        <value>Debe escribir una contraseña.</value>
+    </data>
+    <data name="Register" xml:space="preserve">
+        <value>Registrar</value>
+    </data>
+    <data name="RegisterAccount" xml:space="preserve">
+        <value>¿Todavía no tienes una cuenta? Registrate</value>
+    </data>
+    <data name="LoginError" xml:space="preserve">
+        <value>Email o clave incorrectos.</value>
+    </data>
+    <data name="Logout" xml:space="preserve">
+        <value>Cerrar sesión</value>
+    </data>
+    <data name="User" xml:space="preserve">
+        <value>Usuario</value>
+    </data>
+    <data name="Document" xml:space="preserve">
+        <value>Documento</value>
+    </data>
+    <data name="DocumentPlaceHolder" xml:space="preserve">
+        <value>Ingrese su número de documento ...</value>
+    </data>
+    <data name="DocumentError" xml:space="preserve">
+        <value>Debe ingresar un documento.</value>
+    </data>
+    <data name="FirstName" xml:space="preserve">
+        <value>Nombre</value>
+    </data>
+    <data name="FirstNamePlaceHolder" xml:space="preserve">
+        <value>Escribir nombre</value>
+    </data>
+    <data name="FirstNameError" xml:space="preserve">
+        <value>Debe escribir un nombre</value>
+    </data>
+    <data name="LastName" xml:space="preserve">
+        <value>Apellidos</value>
+    </data>
+    <data name="LastNamePlaceHolder" xml:space="preserve">
+        <value>Escribir apellidos</value>
+    </data>
+    <data name="LastNameError" xml:space="preserve">
+        <value>Debe escribir apellidos</value>
+    </data>
+    <data name="Address" xml:space="preserve">
+        <value>Dirección</value>
+    </data>
+    <data name="AddressPlaceHolder" xml:space="preserve">
+        <value>Introduzca su dirección</value>
+    </data>
+    <data name="AddressError" xml:space="preserve">
+        <value>Debe especificar una dirección.</value>
+    </data>
+    <data name="Phone" xml:space="preserve">
+        <value>Teléfono</value>
+    </data>
+    <data name="PhoneError" xml:space="preserve">
+        <value>Ingresa tu teléfono</value>
+    </data>
+    <data name="PhonePlaceHolder" xml:space="preserve">
+        <value>Debes poner un número de teléfono</value>
+    </data>
+    <data name="PasswordConfirm" xml:space="preserve">
+        <value>Confirmar contraseña</value>
+    </data>
+    <data name="PasswordConfirmError1" xml:space="preserve">
+        <value>Debes ingresar una contraseña</value>
+    </data>
+    <data name="PasswordConfirmError2" xml:space="preserve">
+        <value>La nueva contraseña y la confirmación de contraseña no son iguales.</value>
+    </data>
+    <data name="PasswordConfirmPlaceHolder" xml:space="preserve">
+        <value>Ingrese la confirmación de contraseña.</value>
+    </data>
+    <data name="RegisterAs" xml:space="preserve">
+        <value>Registrarse como</value>
+    </data>
+    <data name="RegisterAsError" xml:space="preserve">
+        <value>Debe seleccionar un rol.</value>
+    </data>
+    <data name="RegisterAsPlaceHolder" xml:space="preserve">
+        <value>Seleccionar un rol...</value>
+    </data>
+    <data name="Ok" xml:space="preserve">
+        <value>Ok</value>
+    </data>
+    <data name="PictureSource" xml:space="preserve">
+        <value>¿Dónde quieres tomar la foto?</value>
+    </data>
+    <data name="Cancel" xml:space="preserve">
+        <value>Cancelar</value>
+    </data>
+    <data name="FromCamera" xml:space="preserve">
+        <value>Tomar con la cámara</value>
+    </data>
+    <data name="FromGallery" xml:space="preserve">
+        <value>De la galería</value>
+    </data>
+    <data name="PasswordRecover" xml:space="preserve">
+        <value>Recuperar la clave</value>
+    </data>
+    <data name="ForgotPassword" xml:space="preserve">
+        <value>¿Olvidaste tu contraseña?</value>
+    </data>
+    <data name="ResetLinkPassword" xml:space="preserve">
+        <value>Le enviaremos un enlace por correo electrónico para restablecer su contraseña.</value>
+    </data>
+    <data name="Save" xml:space="preserve">
+        <value>Guardar</value>
+    </data>
+    <data name="ChangePassword" xml:space="preserve">
+        <value>Cambiar clave</value>
+    </data>
+    <data name="UserUpdated" xml:space="preserve">
+        <value>Actualizado correctamente</value>
+    </data>
+    <data name="ConfirmNewPassword" xml:space="preserve">
+        <value>Confirmar la nueva calve</value>
+    </data>
+    <data name="ConfirmNewPasswordError" xml:space="preserve">
+        <value>Ingresa la confirmación de tu clave.</value>
+    </data>
+    <data name="ConfirmNewPasswordError2" xml:space="preserve">
+        <value>La calve y la confirmación no coinciden</value>
+    </data>
+    <data name="ConfirmNewPasswordPlaceHolder" xml:space="preserve">
+        <value>Introduzca la confirmación de la nueva calve.</value>
+    </data>
+    <data name="CurrentPassword" xml:space="preserve">
+        <value>Calve actual</value>
+    </data>
+    <data name="CurrentPasswordError" xml:space="preserve">
+        <value>Debe introducir su clave actual.</value>
+    </data>
+    <data name="CurrentPasswordPlaceHolder" xml:space="preserve">
+        <value>Escriba la calve actual.</value>
+    </data>
+    <data name="NewPassword" xml:space="preserve">
+        <value>Nueva clave</value>
+    </data>
+    <data name="NewPasswordError" xml:space="preserve">
+        <value>Debes ingresar una nueva clave.</value>
+    </data>
+    <data name="NewPasswordPlaceHolder" xml:space="preserve">
+        <value>Escriba una nueva contraseña</value>
+    </data>
+    <data name="Source" xml:space="preserve">
+        <value>Origen</value>
+    </data>
+    <data name="EndTrip" xml:space="preserve">
+        <value>Fin de viaje</value>
+    </data>
+    <data name="GeolocationError" xml:space="preserve">
+        <value>No fue posible obtener su dirección actual, por favor intente más tarde.</value>
+    </data>
+    <data name="ConfirmAddress" xml:space="preserve">
+        <value>Confirma tu dirección.</value>
+    </data>
+</root>
