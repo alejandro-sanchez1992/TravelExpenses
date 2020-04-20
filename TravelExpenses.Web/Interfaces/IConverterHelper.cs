@@ -6,6 +6,8 @@ namespace TravelExpenses.Web.Interfaces
 {
     public interface IConverterHelper
     {
-        UserResponse ToUserResponse(UserEntity user);
+        EmployeeResponse ToUserResponse(EmployeeEntity employee);
+
+        TripResponse ToTripResponse(TripEntity tripEntity);
     }
 }

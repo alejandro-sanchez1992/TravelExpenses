@@ -59,19 +59,19 @@ namespace TravelExpenses.Prism.ViewModels
             IsRunning = true;
             IsEnabled = false;
 
-            UserResponse user = JsonConvert.DeserializeObject<UserResponse>(Settings.User);
+            EmployeeResponse employee = JsonConvert.DeserializeObject<EmployeeResponse>(Settings.Employee);
             TokenResponse token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
 
             ChangePasswordRequest request = new ChangePasswordRequest
             {
-                Email = user.Email,
+                Email = employee.User.Email,
                 NewPassword = NewPassword,
                 OldPassword = CurrentPassword,
                 CultureInfo = Languages.Culture
             };
 
             string url = App.Current.Resources["UrlAPI"].ToString();
-            Response response = await _apiService.ChangePasswordAsync(url, "/api", "/Account/ChangePassword", request, "bearer", token.Token);
+            Response<object> response = await _apiService.ChangePasswordAsync(url, "/api", "/Account/ChangePassword", request, "bearer", token.Token);
 
             IsRunning = false;
             IsEnabled = true;

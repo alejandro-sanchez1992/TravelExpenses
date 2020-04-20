@@ -4,7 +4,7 @@ namespace TravelExpenses.Common.Helpers
 {
     public static class Settings
     {
-        private const string _user = "user";
+        private const string _employee = "Employee";
         private const string _token = "token";
         private const string _isLogin = "isLogin";
         private const string _isRemembered = "IsRemembered";
@@ -13,10 +13,10 @@ namespace TravelExpenses.Common.Helpers
 
         private static ISettings AppSettings => CrossSettings.Current;
 
-        public static string User
+        public static string Employee
         {
-            get => AppSettings.GetValueOrDefault(_user, _stringDefault);
-            set => AppSettings.AddOrUpdateValue(_user, value);
+            get => AppSettings.GetValueOrDefault(_employee, _stringDefault);
+            set => AppSettings.AddOrUpdateValue(_employee, value);
         }
 
         public static string Token

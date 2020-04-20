@@ -116,7 +116,7 @@ namespace TravelExpenses.Prism.ViewModels
             User.PictureArray = imageArray;
             User.UserTypeId = Role.Id;
             User.CultureInfo = Languages.Culture;
-            Response response = await _apiService.RegisterUserAsync(url, "/api", "/Account", User);
+            Response<object> response = await _apiService.RegisterUserAsync(url, "/api", "/Account", User);
             IsRunning = false;
             IsEnabled = true;
 

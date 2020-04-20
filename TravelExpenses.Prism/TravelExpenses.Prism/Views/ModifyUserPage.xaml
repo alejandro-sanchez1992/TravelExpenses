@@ -45,7 +45,7 @@
                             Image="ic_dni"
                             Keyboard="Numeric"
                             Placeholder="{x:Static resources:Resource.DocumentPlaceHolder}"
-                            Text="{Binding User.Document}"
+                            Text="{Binding Employee.User.Document}"
                             HorizontalOptions="FillAndExpand"/>
 
                     <controls:ImageEntry
@@ -55,7 +55,7 @@
                             ImageHeight="25"
                             Image="ic_user"
                             Placeholder="{x:Static resources:Resource.FirstNamePlaceHolder}"
-                            Text="{Binding User.FirstName}"
+                            Text="{Binding Employee.User.FirstName}"
                             HorizontalOptions="FillAndExpand"/>
 
                     <controls:ImageEntry
@@ -65,7 +65,7 @@
                             ImageHeight="25"
                             Image="ic_user"
                             Placeholder="{x:Static resources:Resource.LastNamePlaceHolder}"
-                            Text="{Binding User.LastName}"
+                            Text="{Binding Employee.User.LastName}"
                             HorizontalOptions="FillAndExpand"/>
 
                     <controls:ImageEntry
@@ -75,7 +75,7 @@
                             ImageHeight="25"
                             Image="ic_location"
                             Placeholder="{x:Static resources:Resource.AddressPlaceHolder}"
-                            Text="{Binding User.Address}"
+                            Text="{Binding Employee.User.Address}"
                             HorizontalOptions="FillAndExpand"/>
 
                     <controls:ImageEntry
@@ -86,7 +86,7 @@
                             Image="ic_phone"
                             Keyboard="Telephone"
                             Placeholder="{x:Static resources:Resource.PhonePlaceHolder}"
-                            Text="{Binding User.PhoneNumber}"
+                            Text="{Binding Employee.User.PhoneNumber}"
                             HorizontalOptions="FillAndExpand"/>
                 </StackLayout>
 

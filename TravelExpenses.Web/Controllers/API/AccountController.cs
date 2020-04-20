@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using TravelExpenses.Common.Enums;
 using TravelExpenses.Common.Models;
 using TravelExpenses.Web.Data;
@@ -43,7 +44,7 @@ namespace TravelExpenses.Web.Controllers.API
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(new Response
+                return BadRequest(new Response<object>
                 {
                     IsSuccess = false,
                     Message = "Bad request",
@@ -57,7 +58,7 @@ namespace TravelExpenses.Web.Controllers.API
             UserEntity user = await _userHelper.GetUserAsync(request.Email);
             if (user != null)
             {
-                return BadRequest(new Response
+                return BadRequest(new Response<object>
                 {
                     IsSuccess = false,
                     Message = Resource.UserAlreadyExists
@@ -108,7 +109,7 @@ namespace TravelExpenses.Web.Controllers.API
             _mailHelper.SendMail(request.Email, Resource.EmailConfirmationSubject, $"<h1>{Resource.EmailConfirmationSubject}</h1>" +
                 $"{Resource.EmailConfirmationBody}</br></br><a href = \"{tokenLink}\">{Resource.ConfirmEmail}</a>");
 
-            return Ok(new Response
+            return Ok(new Response<object>
             {
                 IsSuccess = true,
                 Message = Resource.EmailConfirmationSent
@@ -121,7 +122,7 @@ namespace TravelExpenses.Web.Controllers.API
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(new Response
+                return BadRequest(new Response<object>
                 {
                     IsSuccess = false,
                     Message = "Bad request",
@@ -135,7 +136,7 @@ namespace TravelExpenses.Web.Controllers.API
             UserEntity user = await _userHelper.GetUserAsync(request.Email);
             if (user == null)
             {
-                return BadRequest(new Response
+                return BadRequest(new Response<object>
                 {
                     IsSuccess = false,
                     Message = Resource.UserNotFoundError
@@ -147,7 +148,7 @@ namespace TravelExpenses.Web.Controllers.API
             _mailHelper.SendMail(request.Email, Resource.RecoverPasswordSubject, $"<h1>{Resource.RecoverPasswordSubject}</h1>" +
                 $"{Resource.RecoverPasswordBody}</br></br><a href = \"{link}\">{Resource.RecoverPasswordSubject}</a>");
 
-            return Ok(new Response
+            return Ok(new Response<object>
             {
                 IsSuccess = true,
                 Message = Resource.RecoverPasswordEmailSent
@@ -202,7 +203,7 @@ namespace TravelExpenses.Web.Controllers.API
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(new Response
+                return BadRequest(new Response<object>
                 {
                     IsSuccess = false,
                     Message = "Bad request",
@@ -216,7 +217,7 @@ namespace TravelExpenses.Web.Controllers.API
             UserEntity user = await _userHelper.GetUserAsync(request.Email);
             if (user == null)
             {
-                return BadRequest(new Response
+                return BadRequest(new Response<object>
                 {
                     IsSuccess = false,
                     Message = Resource.UserNotFoundError
@@ -226,14 +227,14 @@ namespace TravelExpenses.Web.Controllers.API
             IdentityResult result = await _userHelper.ChangePasswordAsync(user, request.OldPassword, request.NewPassword);
             if (!result.Succeeded)
             {
-                return BadRequest(new Response
+                return BadRequest(new Response<object>
                 {
                     IsSuccess = false,
                     Message = result.Errors.FirstOrDefault().Description
                 });
             }
 
-            return Ok(new Response
+            return Ok(new Response<object>
             {
                 IsSuccess = true,
                 Message = Resource.ChangePasswordSuccess
@@ -253,13 +254,51 @@ namespace TravelExpenses.Web.Controllers.API
             CultureInfo cultureInfo = new CultureInfo(emailRequest.CultureInfo);
             Resource.Culture = cultureInfo;
 
-            UserEntity userEntity = await _userHelper.GetUserAsync(emailRequest.Email);
-            if (userEntity == null)
+            var employee = await _dataContext.Employees
+                .Include(u => u.User)
+                .Include(t => t.Trips)
+                .ThenInclude(td => td.TripDetails)
+                .FirstOrDefaultAsync(o => o.User.UserName.ToLower() == emailRequest.Email.ToLower());
+
+            EmployeeEntity response = new EmployeeEntity
+            {
+                Id = employee.Id,
+                User = new UserEntity {
+                    Id = employee.User.Id,
+                    Address = employee.User.Address,
+                    Document = employee.User.Document,
+                    Email = employee.User.Email,
+                    FirstName = employee.User.FirstName,
+                    LastName = employee.User.LastName,
+                    PhoneNumber = employee.User.PhoneNumber,
+                    UserName = employee.User.Email,
+                    PicturePath = employee.User.PicturePath,
+                    UserType = employee.User.UserType
+                },
+                Trips = employee.Trips?.Select(t => new TripEntity
+                {
+                    Id = t.Id,
+                    StartDate = t.StartDate,
+                    EndDate = t.EndDate,
+                    TripDetails = t.TripDetails?.Select(td => new TripDetailEntity
+                    {
+                        Date = td.Date,
+                        Id = td.Id,
+                        Description = td.Description,
+                        Amount = td.Amount,
+                        Expense = td.Expense,
+                        PicturePath = td.PicturePath,
+
+                    }).ToList()
+                }).ToList()
+            };
+
+            if (employee == null)
             {
                 return NotFound(Resource.UserNotFoundError);
             }
 
-            return Ok(_converterHelper.ToUserResponse(userEntity));
+            return Ok(_converterHelper.ToUserResponse(response));
         }
     }
 }
