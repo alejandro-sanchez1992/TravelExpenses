@@ -5,7 +5,8 @@
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              xmlns:resources="clr-namespace:TravelExpenses.Prism.Resources"
-             xmlns:controls="clr-namespace:TravelExpenses.Prism.Controls" xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+             xmlns:controls="clr-namespace:TravelExpenses.Prism.Controls"
+             xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="TravelExpenses.Prism.Views.ModifyUserPage"
              BackgroundColor="{StaticResource ColorBackgroud}"
@@ -92,13 +93,37 @@
 
             </ScrollView>
 
-            <Button Command="{Binding SaveCommand}"
-                    IsEnabled="{Binding IsEnabled}"
-                    Text="{x:Static resources:Resource.Save}"/>
+            <controls:GradientButton
+                Margin="20,10"
+                BorderRadius="40"
+                HeightRequest="65"
+                EndColor="#FCA741"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="EndAndExpand"
+                StartColor="#FDDA51"
+                Text="{x:Static resources:Resource.Save}"
+                Command="{Binding SaveCommand}"
+                IsEnabled="{Binding IsEnabled}"
+                TextColor="White"
+                controls:ViewEffects.HasShadow="True" 
+                controls:ViewEffects.ShadowColor="#222222" 
+                controls:ViewEffects.ShadowSize="4" />
 
-            <Button Command="{Binding ChangePasswordCommand}"
-                    IsEnabled="{Binding IsEnabled}"
-                    Text="{x:Static resources:Resource.ChangePassword}" />
+            <controls:GradientButton
+                Margin="20,10"
+                BorderRadius="40"
+                HeightRequest="65"
+                EndColor="#DDDDDD"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="EndAndExpand"
+                StartColor="#AAAAAA"
+                Text="{x:Static resources:Resource.ChangePassword}"
+                Command="{Binding ChangePasswordCommand}"
+                IsEnabled="{Binding IsEnabled}"
+                TextColor="White"
+                controls:ViewEffects.HasShadow="True" 
+                controls:ViewEffects.ShadowColor="#222222" 
+                controls:ViewEffects.ShadowSize="4" />
 
         </StackLayout>
         <busyindicator:SfBusyIndicator
@@ -110,7 +135,7 @@
             TextColor="#000"
             IsVisible="{Binding IsRunning}"
             Title="{x:Static resources:Resource.Loading}"
-            VerticalOptions="Center"
+            VerticalOptions="EndAndExpand"
             ViewBoxWidth="80"
             ViewBoxHeight="80" />
     </AbsoluteLayout>

@@ -223,7 +223,7 @@ namespace TravelExpenses.Prism.ViewModels
 
             await App.Current.MainPage.DisplayAlert(
                 Languages.Accept,
-                Languages.RegisterAsError,
+                response.Message,
                 Languages.Accept);
 
             await _navigationService.GoBackToRootAsync();
