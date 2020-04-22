@@ -333,5 +333,50 @@ namespace TravelExpenses.Common.Services
                 };
             }
         }
+
+        public async Task<Response<object>> GetTripAsync(
+            string urlBase,
+            string servicePrefix,
+            string controller,
+            int id,
+            string tokenType,
+            string accessToken)
+        {
+            try
+            {
+                HttpClient client = new HttpClient
+                {
+                    BaseAddress = new Uri(urlBase)
+                };
+
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(tokenType, accessToken);
+                string url = $"{servicePrefix}{controller}/{id}";
+                HttpResponseMessage response = await client.GetAsync(url);
+                string answer = await response.Content.ReadAsStringAsync();
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response<object>
+                    {
+                        IsSuccess = false,
+                        Message = answer,
+                    };
+                }
+
+                TripResponse trip = JsonConvert.DeserializeObject<TripResponse>(answer);
+                return new Response<object>
+                {
+                    IsSuccess = true,
+                    Result = trip,
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Response<object>
+                {
+                    IsSuccess = false,
+                    Message = ex.Message,
+                };
+            }
+        }
     }
 }

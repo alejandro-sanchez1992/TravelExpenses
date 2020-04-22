@@ -89,7 +89,7 @@ namespace TravelExpenses.Prism.ViewModels
                 new Menu
                 {
                     Icon = "ic_trips",
-                    PageName = "PetsPage",
+                    PageName = "HomePage",
                     Title = "My Trips"
                 },
 

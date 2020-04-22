@@ -23,5 +23,7 @@ namespace TravelExpenses.Common.interfaces
         Task<Response<object>> GetListAsync<T>(string urlBase, string servicePrefix, string controller, string tokenType, string accessToken);
 
         Task<Response<object>> PostAsync<T>(string urlBase, string servicePrefix, string controller, T model, string tokenType, string accessToken);
+
+        Task<Response<object>> GetTripAsync(string urlBase, string servicePrefix, string controller, int id, string tokenType, string accessToken);
     }
 }

@@ -16,7 +16,6 @@ namespace TravelExpenses.Prism.ViewModels
     {
         private readonly INavigationService _navigationService;
         private readonly IApiService _apiService;
-        private DelegateCommand _startTripCommand;
         private CountryResponse _country;
         private ObservableCollection<CountryResponse> _countries;
         private CityResponse _city;
@@ -34,6 +33,8 @@ namespace TravelExpenses.Prism.ViewModels
             _navigationService = navigationService;
             _apiService = apiService;
             Title = Languages.Register;
+            StartDate = DateTime.Today;
+            EndDate = DateTime.Today;
             IsEnabled = true;
             LoadContriesAsync();
         }

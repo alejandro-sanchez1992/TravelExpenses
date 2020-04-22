@@ -31,41 +31,55 @@ namespace TravelExpenses.Web.Helpers
                     PicturePath = employee.User.PicturePath,
                     UserType = employee.User.UserType
                 },
-                Trips = employee.Trips?.Select(t => new TripResponse
-                {
-                    Id = t.Id,
-                    StartDate = t.StartDate,
-                    EndDate = t.EndDate,
-                    TripDetails = t.TripDetails?.Select(td => new TripDetailResponse
-                    {
-                        Date = td.Date,
-                        Id = td.Id,
-                        Description = td.Description,
-                        Amount = td.Amount,
-                        ExpenseType = td.Expense.Name,
-                        PicturePath = td.PicturePath
-
-                    }).ToList()
-                }).ToList()
+                Trips = employee.Trips?.Select(t => ToTripResponse(t)).ToList(),
             };
+        }
+
+        public List<TripResponse> ToTripResponse(List<TripEntity> tripEntity)
+        {
+            return tripEntity.Select(t => new TripResponse
+            {
+                Id = t.Id,
+                EndDate = t.EndDate,
+                StartDate = t.StartDate,
+                City = new CityResponse
+                {
+                    Id = t.City.Id,
+                    Name = t.City.Name
+                },
+                TripDetails = t.TripDetails?.Select(td => ToTripDetailResponse(td)).ToList()
+            }).ToList();
         }
 
         public TripResponse ToTripResponse(TripEntity tripEntity)
         {
             return new TripResponse
             {
-                EndDate = tripEntity.EndDate,
                 Id = tripEntity.Id,
+                EndDate = tripEntity.EndDate,
                 StartDate = tripEntity.StartDate,
-                TripDetails = tripEntity.TripDetails?.Select(td => new TripDetailResponse
+                City = new CityResponse {
+                    Id = tripEntity.City.Id,
+                    Name = tripEntity.City.Name
+                },
+                TripDetails = tripEntity.TripDetails?.Select(td => ToTripDetailResponse(td) ).ToList()
+            };
+        }
+
+        public TripDetailResponse ToTripDetailResponse(TripDetailEntity tripDetailEntity)
+        {
+            return new TripDetailResponse
+            {
+                Date = tripDetailEntity.Date,
+                Id = tripDetailEntity.Id,
+                Description = tripDetailEntity.Description,
+                Amount = tripDetailEntity.Amount,
+                ExpenseType = new ExpenseTypeResponse
                 {
-                    Date = td.Date,
-                    Id = td.Id,
-                    Description = td.Description,
-                    Amount = td.Amount,
-                    ExpenseType = td.Expense.Name,
-                    PicturePath = td.PicturePath
-                }).ToList()
+                    Id = tripDetailEntity.Expense.Id,
+                    Name = tripDetailEntity.Expense.Name
+                },
+                PicturePath = tripDetailEntity.PicturePath
             };
         }
     }

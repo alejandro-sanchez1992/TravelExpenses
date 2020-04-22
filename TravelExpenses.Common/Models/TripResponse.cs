@@ -17,6 +17,8 @@ namespace TravelExpenses.Common.Models
 
         public double TotalAmount { get; }
 
+        public CityResponse City { get; set; }
+
         public List<TripDetailResponse> TripDetails { get; set; }
     }
 }

@@ -14,7 +14,7 @@ namespace TravelExpenses.Common.Models
 
         public double Amount { get; set; }
 
-        public string ExpenseType { get; set; }
+        public ExpenseTypeResponse ExpenseType { get; set; }
 
         public string PicturePath { get; set; }
     }

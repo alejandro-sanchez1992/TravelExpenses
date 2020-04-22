@@ -256,49 +256,19 @@ namespace TravelExpenses.Web.Controllers.API
 
             var employee = await _dataContext.Employees
                 .Include(u => u.User)
-                .Include(t => t.Trips)
-                .ThenInclude(td => td.TripDetails)
+                .Include(u => u.Trips)
+                .ThenInclude(u => u.City)
+                .Include(u => u.Trips)
+                .ThenInclude(u => u.TripDetails)
+                .ThenInclude(u => u.Expense)
                 .FirstOrDefaultAsync(o => o.User.UserName.ToLower() == emailRequest.Email.ToLower());
-
-            EmployeeEntity response = new EmployeeEntity
-            {
-                Id = employee.Id,
-                User = new UserEntity {
-                    Id = employee.User.Id,
-                    Address = employee.User.Address,
-                    Document = employee.User.Document,
-                    Email = employee.User.Email,
-                    FirstName = employee.User.FirstName,
-                    LastName = employee.User.LastName,
-                    PhoneNumber = employee.User.PhoneNumber,
-                    UserName = employee.User.Email,
-                    PicturePath = employee.User.PicturePath,
-                    UserType = employee.User.UserType
-                },
-                Trips = employee.Trips?.Select(t => new TripEntity
-                {
-                    Id = t.Id,
-                    StartDate = t.StartDate,
-                    EndDate = t.EndDate,
-                    TripDetails = t.TripDetails?.Select(td => new TripDetailEntity
-                    {
-                        Date = td.Date,
-                        Id = td.Id,
-                        Description = td.Description,
-                        Amount = td.Amount,
-                        Expense = td.Expense,
-                        PicturePath = td.PicturePath,
-
-                    }).ToList()
-                }).ToList()
-            };
 
             if (employee == null)
             {
                 return NotFound(Resource.UserNotFoundError);
             }
 
-            return Ok(_converterHelper.ToUserResponse(response));
+            return Ok(_converterHelper.ToUserResponse(employee));
         }
     }
 }

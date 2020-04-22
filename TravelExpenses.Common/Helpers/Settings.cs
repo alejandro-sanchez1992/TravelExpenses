@@ -5,6 +5,7 @@ namespace TravelExpenses.Common.Helpers
     public static class Settings
     {
         private const string _employee = "Employee";
+        private const string _trip = "Trip";
         private const string _token = "token";
         private const string _isLogin = "isLogin";
         private const string _isRemembered = "IsRemembered";
@@ -17,6 +18,12 @@ namespace TravelExpenses.Common.Helpers
         {
             get => AppSettings.GetValueOrDefault(_employee, _stringDefault);
             set => AppSettings.AddOrUpdateValue(_employee, value);
+        }
+
+        public static string Trip
+        {
+            get => AppSettings.GetValueOrDefault(_trip, _stringDefault);
+            set => AppSettings.AddOrUpdateValue(_trip, value);
         }
 
         public static string Token
