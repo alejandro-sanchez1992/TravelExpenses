@@ -27,7 +27,7 @@
 
                     <ffimageloading:CachedImage
                         x:Name="Picture"
-                        Source="{Binding User.PictureFullPath}"
+                        Source="{Binding Employee.User.PictureFullPath}"
                         CacheDuration= "50"
                         HeightRequest="100"
                         Margin="5"
@@ -45,13 +45,13 @@
 
                     </ffimageloading:CachedImage>
 
-                    <Label Text="{Binding User.FirstName}"
+                    <Label Text="{Binding Employee.User.FirstName}"
                            FontAttributes="Bold"
                            HorizontalOptions="Center"
                            VerticalOptions="Center"
                            FontSize="22"
                            TextColor="White" />
-                    <Label Text="{Binding User.LastName}"
+                    <Label Text="{Binding Employee.User.LastName}"
                            HorizontalOptions="Center"
                            VerticalOptions="Center"
                            FontFamily=""

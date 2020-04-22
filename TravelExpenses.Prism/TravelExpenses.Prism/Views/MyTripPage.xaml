@@ -2,10 +2,11 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
-             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" xmlns:controls="clr-namespace:TravelExpenses.Prism.Controls"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:controls="clr-namespace:TravelExpenses.Prism.Controls"
              ios:Page.UseSafeArea="true"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="TravelExpenses.Prism.Views.HomePage"
+             x:Class="TravelExpenses.Prism.Views.MyTripPage"
              BackgroundColor="{StaticResource ColorBackgroud}"
              Title="{Binding Title}">
 
@@ -18,7 +19,7 @@
                     Padding="10">
                     <ListView 
                         HasUnevenRows="true"
-                        ItemsSource="{Binding MyTrips}"
+                        ItemsSource="{Binding Trip.TripDetails}"
                         BackgroundColor="Transparent"
                         SeparatorColor="#cccccc">
                         <ListView.ItemTemplate>
@@ -46,7 +47,7 @@
                                                     Margin="5"
                                                     FontAttributes="None"
                                                     FontSize="Medium" 
-                                                    Text="{Binding City.Name}"
+                                                    Text="{Binding Description}"
                                                     TextColor="Black">
                                                 </Label>
                                             </StackLayout>
@@ -57,7 +58,7 @@
                                                     Margin="5"
                                                     FontAttributes="Italic"
                                                     FontSize="Small" 
-                                                    Text="{Binding StartDate}"
+                                                    Text="{Binding Amount}"
                                                     TextColor="#cccccc">
                                                 </Label>
                                             </StackLayout>
@@ -84,8 +85,8 @@
                 EndColor="#FCA741"
                 HorizontalOptions="FillAndExpand"
                 StartColor="#FDDA51"
-                Text="Add New Trip"
-                Command="{Binding AddTripsCommand}"
+                Text="Add New Expense"
+                Command="{Binding AddExpensesCommand}"
                 IsEnabled="{Binding IsEnabled}"
                 TextColor="White"
                 controls:ViewEffects.HasShadow="True" 

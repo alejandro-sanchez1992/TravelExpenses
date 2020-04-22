@@ -5,6 +5,6 @@ namespace TravelExpenses.Web.Interfaces
 {
 	public interface IMailHelper
 	{
-		Response SendMail(string to, string subject, string body);
+		Response<object> SendMail(string to, string subject, string body);
 	}
 }

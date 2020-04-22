@@ -17,7 +17,7 @@ namespace TravelExpenses.Prism.ViewModels
     {
         private readonly INavigationService _navigationService;
         private readonly IApiService _apiService;
-        private UserResponse _user;
+        private EmployeeResponse _user;
         private DelegateCommand _modifyUserCommand;
         private static MainMasterDetailPageViewModel _instance;
 
@@ -33,7 +33,7 @@ namespace TravelExpenses.Prism.ViewModels
 
         public DelegateCommand ModifyUserCommand => _modifyUserCommand ?? (_modifyUserCommand = new DelegateCommand(ModifyUserAsync));
 
-        public UserResponse User
+        public EmployeeResponse Employee
         {
             get => _user;
             set => SetProperty(ref _user, value);
@@ -53,17 +53,17 @@ namespace TravelExpenses.Prism.ViewModels
                 return;
             }
 
-            UserResponse user = JsonConvert.DeserializeObject<UserResponse>(Settings.User);
+            EmployeeResponse employee = JsonConvert.DeserializeObject<EmployeeResponse>(Settings.Employee);
             TokenResponse token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
             EmailRequest emailRequest = new EmailRequest
             {
                 CultureInfo = Languages.Culture,
-                Email = user.Email
+                Email = employee.User.Email
             };
 
-            Response response = await _apiService.GetUserByEmail(url, "api", "/Account/GetUserByEmail", "bearer", token.Token, emailRequest);
-            UserResponse userResponse = (UserResponse)response.Result;
-            Settings.User = JsonConvert.SerializeObject(userResponse);
+            Response<EmployeeResponse> response = await _apiService.GetUserByEmail(url, "api", "/Account/GetUserByEmail", "bearer", token.Token, emailRequest);
+            EmployeeResponse userResponse = (EmployeeResponse)response.Result;
+            Settings.Employee = JsonConvert.SerializeObject(userResponse);
             LoadUser();
         }
 
@@ -76,7 +76,7 @@ namespace TravelExpenses.Prism.ViewModels
         {
             if (Settings.IsLogin)
             {
-                User = JsonConvert.DeserializeObject<UserResponse>(Settings.User);
+                Employee = JsonConvert.DeserializeObject<EmployeeResponse>(Settings.Employee);
             }
         }
 
@@ -89,21 +89,21 @@ namespace TravelExpenses.Prism.ViewModels
                 new Menu
                 {
                     Icon = "ic_trips",
-                    PageName = "PetsPage",
+                    PageName = "HomePage",
                     Title = "My Trips"
                 },
 
                 new Menu
                 {
                     Icon = "ic_add_trips",
-                    PageName = "AgendaPage",
+                    PageName = "AddTripsPage",
                     Title = "Add Trip"
                 },
 
                 new Menu
                 {
                     Icon = "ic_edit_user",
-                    PageName = "ProfilePage",
+                    PageName = "ModifyUserPage",
                     Title = "Modify Profile"
                 },
 

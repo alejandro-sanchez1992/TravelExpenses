@@ -53,6 +53,9 @@ namespace TravelExpenses.Prism
             containerRegistry.RegisterForNavigation<RegisterPage, RegisterPageViewModel>();
             containerRegistry.RegisterForNavigation<RememberPasswordPage, RememberPasswordPageViewModel>();
             containerRegistry.RegisterForNavigation<ChangePasswordPage, ChangePasswordPageViewModel>();
+            containerRegistry.RegisterForNavigation<AddTripsPage, AddTripsPageViewModel>();
+            containerRegistry.RegisterForNavigation<MyTripPage, MyTripViewModel>();
+            containerRegistry.RegisterForNavigation<AddExpensePage, AddExpenseViewModel>();
         }
     }
 

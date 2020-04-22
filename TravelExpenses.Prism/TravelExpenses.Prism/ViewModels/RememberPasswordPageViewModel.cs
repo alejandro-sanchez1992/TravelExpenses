@@ -17,7 +17,10 @@ namespace TravelExpenses.Prism.ViewModels
         private bool _isEnabled;
         private DelegateCommand _recoverCommand;
 
-        public RememberPasswordPageViewModel(INavigationService navigationService, IApiService apiService, IRegexHelper regexHelper)
+        public RememberPasswordPageViewModel(
+            INavigationService navigationService,
+            IApiService apiService,
+            IRegexHelper regexHelper)
             : base(navigationService)
         {
             _navigationService = navigationService;
@@ -70,7 +73,7 @@ namespace TravelExpenses.Prism.ViewModels
                 CultureInfo = Languages.Culture
             };
 
-            Response response = await _apiService.RecoverPasswordAsync(url, "/api", "/Account/RecoverPassword", request);
+            Response<object> response = await _apiService.RecoverPasswordAsync(url, "/api", "/Account/RecoverPassword", request);
 
             IsRunning = false;
             IsEnabled = true;

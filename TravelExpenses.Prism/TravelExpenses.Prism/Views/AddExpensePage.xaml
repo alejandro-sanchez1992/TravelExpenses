@@ -1,14 +1,17 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+             xmlns:controls="clr-namespace:TravelExpenses.Prism.Controls"
+             xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+             xmlns:resources="clr-namespace:TravelExpenses.Prism.Resources"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
-             xmlns:resources="clr-namespace:TravelExpenses.Prism.Resources"
-             xmlns:controls="clr-namespace:TravelExpenses.Prism.Controls"
-             xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+             ios:Page.UseSafeArea="true"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="TravelExpenses.Prism.Views.ModifyUserPage"
+             x:Class="TravelExpenses.Prism.Views.AddExpensePage"
              BackgroundColor="{StaticResource ColorBackgroud}"
              Title="{Binding Title}">
 
@@ -16,9 +19,14 @@
         <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
                      AbsoluteLayout.LayoutFlags="All"
                      Padding="5">
-
             <ScrollView>
                 <StackLayout Padding="20">
+                    <Label  HorizontalOptions="CenterAndExpand" 
+                                Text="Add New Expense"
+                                FontAttributes="Bold"
+                                FontSize="32"
+                                Margin="0,0,0,20"/>
+
                     <ffimageloading:CachedImage
                         Aspect="AspectFit"
                         Source="{Binding Image}"
@@ -31,12 +39,17 @@
                         <ffimageloading:CachedImage.Transformations>
                             <fftransformations:CircleTransformation />
                         </ffimageloading:CachedImage.Transformations>
-
                         <ffimageloading:CachedImage.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding ChangeImageCommand}"/>
                         </ffimageloading:CachedImage.GestureRecognizers>
 
                     </ffimageloading:CachedImage>
+
+                    <combobox:SfComboBox HeightRequest="40" x:Name="ddlExpenseType" Watermark="Select Expense Type" DataSource="{Binding ExpenseTypes}" SelectedItem="{Binding ExpenseType}" DisplayMemberPath="Name" />
+
+                    <Label Text="Date:" Margin="0,15,0,0"/>
+
+                    <DatePicker Date="{Binding ExpenseDate}" VerticalOptions="CenterAndExpand" />
 
                     <controls:ImageEntry
                             TextColor="#979797"
@@ -46,53 +59,16 @@
                             Image="ic_dni"
                             Keyboard="Numeric"
                             Placeholder="{x:Static resources:Resource.DocumentPlaceHolder}"
-                            Text="{Binding Employee.User.Document}"
+                            Text="{Binding TripDetail.Amount}"
                             HorizontalOptions="FillAndExpand"/>
 
-                    <controls:ImageEntry
-                            TextColor="#979797"
-                            LineColor="#e6e6e6"
-                            ImageWidth="25"
-                            ImageHeight="25"
-                            Image="ic_user"
-                            Placeholder="{x:Static resources:Resource.FirstNamePlaceHolder}"
-                            Text="{Binding Employee.User.FirstName}"
-                            HorizontalOptions="FillAndExpand"/>
+                    <Label Text="Description:" Margin="0,15,0,0"/>
 
-                    <controls:ImageEntry
-                            TextColor="#979797"
-                            LineColor="#e6e6e6"
-                            ImageWidth="25"
-                            ImageHeight="25"
-                            Image="ic_user"
-                            Placeholder="{x:Static resources:Resource.LastNamePlaceHolder}"
-                            Text="{Binding Employee.User.LastName}"
-                            HorizontalOptions="FillAndExpand"/>
+                    <Editor VerticalOptions="FillAndExpand" Text="{Binding TripDetail.Description}" />
 
-                    <controls:ImageEntry
-                            TextColor="#979797"
-                            LineColor="#e6e6e6"
-                            ImageWidth="25"
-                            ImageHeight="25"
-                            Image="ic_location"
-                            Placeholder="{x:Static resources:Resource.AddressPlaceHolder}"
-                            Text="{Binding Employee.User.Address}"
-                            HorizontalOptions="FillAndExpand"/>
-
-                    <controls:ImageEntry
-                            TextColor="#979797"
-                            LineColor="#e6e6e6"
-                            ImageWidth="28"
-                            ImageHeight="25"
-                            Image="ic_phone"
-                            Keyboard="Telephone"
-                            Placeholder="{x:Static resources:Resource.PhonePlaceHolder}"
-                            Text="{Binding Employee.User.PhoneNumber}"
-                            HorizontalOptions="FillAndExpand"/>
                 </StackLayout>
 
             </ScrollView>
-
             <controls:GradientButton
                 Margin="20,10"
                 BorderRadius="40"
@@ -108,23 +84,6 @@
                 controls:ViewEffects.HasShadow="True" 
                 controls:ViewEffects.ShadowColor="#222222" 
                 controls:ViewEffects.ShadowSize="4" />
-
-            <controls:GradientButton
-                Margin="20,10"
-                BorderRadius="40"
-                HeightRequest="65"
-                EndColor="#DDDDDD"
-                HorizontalOptions="FillAndExpand"
-                VerticalOptions="EndAndExpand"
-                StartColor="#AAAAAA"
-                Text="{x:Static resources:Resource.ChangePassword}"
-                Command="{Binding ChangePasswordCommand}"
-                IsEnabled="{Binding IsEnabled}"
-                TextColor="White"
-                controls:ViewEffects.HasShadow="True" 
-                controls:ViewEffects.ShadowColor="#222222" 
-                controls:ViewEffects.ShadowSize="4" />
-
         </StackLayout>
         <busyindicator:SfBusyIndicator
             AnimationType="Ball"
@@ -135,7 +94,7 @@
             TextColor="#000"
             IsVisible="{Binding IsRunning}"
             Title="{x:Static resources:Resource.Loading}"
-            VerticalOptions="EndAndExpand"
+            VerticalOptions="Center"
             ViewBoxWidth="80"
             ViewBoxHeight="80" />
     </AbsoluteLayout>

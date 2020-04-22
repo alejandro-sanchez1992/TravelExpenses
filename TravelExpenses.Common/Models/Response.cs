@@ -1,7 +1,7 @@
 ﻿using System;
 namespace TravelExpenses.Common.Models
 {
-    public class Response
+    public class Response<T> where T : class
     {
         public bool IsSuccess { get; set; }
 

@@ -98,7 +98,7 @@ namespace TravelExpenses.Prism.ViewModels
                 Username = Email
             };
 
-            Response response = await _apiService.GetTokenAsync(url, "Account", "/CreateToken", request);
+            Response<TokenResponse> response = await _apiService.GetTokenAsync(url, "Account", "/CreateToken", request);
 
             if (!response.IsSuccess)
             {
@@ -116,10 +116,10 @@ namespace TravelExpenses.Prism.ViewModels
                 Email = Email
             };
 
-            Response response2 = await _apiService.GetUserByEmail(url, "api", "/Account/GetUserByEmail", "bearer", token.Token, emailRequest);
-            UserResponse userResponse = (UserResponse)response2.Result;
+            Response<EmployeeResponse> response2 = await _apiService.GetUserByEmail(url, "api", "/Account/GetUserByEmail", "bearer", token.Token, emailRequest);
+            EmployeeResponse userResponse = (EmployeeResponse)response2.Result;
 
-            Settings.User = JsonConvert.SerializeObject(userResponse);
+            Settings.Employee = JsonConvert.SerializeObject(userResponse);
             Settings.Token = JsonConvert.SerializeObject(token);
             Settings.IsLogin = true;
 

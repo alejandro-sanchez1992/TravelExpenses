@@ -23,7 +23,7 @@ namespace TravelExpenses.Prism.ViewModels
             if (PageName == "LoginPage" && Settings.IsLogin)
             {
                 Settings.IsLogin = false;
-                Settings.User = null;
+                Settings.Employee = null;
                 Settings.Token = null;
             }
 
