@@ -10,6 +10,7 @@
             <!-- Parameters -->
             <x:String x:Key="UrlAPI">https://travelexpensesweb.azurewebsites.net/</x:String>
             <x:String x:Key="UrlNoImage">https://travelexpensesweb.azurewebsites.net/images/noimage.png</x:String>
+            <x:String x:Key="UrlNoImage2">https://travelexpensesweb.azurewebsites.net/images/noimage2.png</x:String>
 
             <Color x:Key="ColorBackgroud">#FFFFFF</Color>
             <Color x:Key="ColorSecondary">#A6ABAB</Color>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -12,7 +13,7 @@ namespace TravelExpenses.Common.Services
 {
     public class ApiService : IApiService
     {
-        public async Task<Response> PutAsync<T>(string urlBase, string servicePrefix, string controller, T model, string tokenType, string accessToken)
+        public async Task<Response<object>> PutAsync<T>(string urlBase, string servicePrefix, string controller, T model, string tokenType, string accessToken)
         {
             try
             {
@@ -29,7 +30,7 @@ namespace TravelExpenses.Common.Services
                 string answer = await response.Content.ReadAsStringAsync();
                 if (!response.IsSuccessStatusCode)
                 {
-                    return new Response
+                    return new Response<object>
                     {
                         IsSuccess = false,
                         Message = answer,
@@ -37,7 +38,7 @@ namespace TravelExpenses.Common.Services
                 }
 
                 T obj = JsonConvert.DeserializeObject<T>(answer);
-                return new Response
+                return new Response<object>
                 {
                     IsSuccess = true,
                     Result = obj,
@@ -45,7 +46,7 @@ namespace TravelExpenses.Common.Services
             }
             catch (Exception ex)
             {
-                return new Response
+                return new Response<object>
                 {
                     IsSuccess = false,
                     Message = ex.Message,
@@ -63,7 +64,7 @@ namespace TravelExpenses.Common.Services
             return await CrossConnectivity.Current.IsRemoteReachable(url);
         }
 
-        public async Task<Response> GetTokenAsync(string urlBase, string servicePrefix, string controller, TokenRequest request)
+        public async Task<Response<TokenResponse>> GetTokenAsync(string urlBase, string servicePrefix, string controller, TokenRequest request)
         {
             try
             {
@@ -80,7 +81,7 @@ namespace TravelExpenses.Common.Services
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    return new Response
+                    return new Response<TokenResponse>
                     {
                         IsSuccess = false,
                         Message = result,
@@ -88,7 +89,7 @@ namespace TravelExpenses.Common.Services
                 }
 
                 TokenResponse token = JsonConvert.DeserializeObject<TokenResponse>(result);
-                return new Response
+                return new Response<TokenResponse>
                 {
                     IsSuccess = true,
                     Result = token
@@ -96,7 +97,7 @@ namespace TravelExpenses.Common.Services
             }
             catch (Exception ex)
             {
-                return new Response
+                return new Response<TokenResponse>
                 {
                     IsSuccess = false,
                     Message = ex.Message
@@ -104,7 +105,7 @@ namespace TravelExpenses.Common.Services
             }
         }
 
-        public async Task<Response> GetUserByEmail(
+        public async Task<Response<EmployeeResponse>> GetUserByEmail(
             string urlBase,
             string servicePrefix,
             string controller,
@@ -128,15 +129,15 @@ namespace TravelExpenses.Common.Services
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    return new Response
+                    return new Response<EmployeeResponse>
                     {
                         IsSuccess = false,
                         Message = result,
                     };
                 }
 
-                UserResponse userResponse = JsonConvert.DeserializeObject<UserResponse>(result);
-                return new Response
+                EmployeeResponse userResponse = JsonConvert.DeserializeObject<EmployeeResponse>(result);
+                return new Response<EmployeeResponse>
                 {
                     IsSuccess = true,
                     Result = userResponse
@@ -144,7 +145,7 @@ namespace TravelExpenses.Common.Services
             }
             catch (Exception ex)
             {
-                return new Response
+                return new Response<EmployeeResponse>
                 {
                     IsSuccess = false,
                     Message = ex.Message
@@ -152,7 +153,7 @@ namespace TravelExpenses.Common.Services
             }
         }
 
-        public async Task<Response> ChangePasswordAsync(
+        public async Task<Response<object>> ChangePasswordAsync(
             string urlBase,
             string servicePrefix,
             string controller,
@@ -173,12 +174,12 @@ namespace TravelExpenses.Common.Services
                 string url = $"{servicePrefix}{controller}";
                 HttpResponseMessage response = await client.PostAsync(url, content);
                 string answer = await response.Content.ReadAsStringAsync();
-                Response obj = JsonConvert.DeserializeObject<Response>(answer);
+                Response<object> obj = JsonConvert.DeserializeObject<Response<object>>(answer);
                 return obj;
             }
             catch (Exception ex)
             {
-                return new Response
+                return new Response<object>
                 {
                     IsSuccess = false,
                     Message = ex.Message,
@@ -186,7 +187,7 @@ namespace TravelExpenses.Common.Services
             }
         }
 
-        public async Task<Response> RecoverPasswordAsync(string urlBase, string servicePrefix, string controller, EmailRequest emailRequest)
+        public async Task<Response<object>> RecoverPasswordAsync(string urlBase, string servicePrefix, string controller, EmailRequest emailRequest)
         {
             try
             {
@@ -200,12 +201,12 @@ namespace TravelExpenses.Common.Services
                 string url = $"{servicePrefix}{controller}";
                 HttpResponseMessage response = await client.PostAsync(url, content);
                 string answer = await response.Content.ReadAsStringAsync();
-                Response obj = JsonConvert.DeserializeObject<Response>(answer);
+                Response<object> obj = JsonConvert.DeserializeObject<Response<object>>(answer);
                 return obj;
             }
             catch (Exception ex)
             {
-                return new Response
+                return new Response<object>
                 {
                     IsSuccess = false,
                     Message = ex.Message,
@@ -213,7 +214,7 @@ namespace TravelExpenses.Common.Services
             }
         }
 
-        public async Task<Response> RegisterUserAsync(string urlBase, string servicePrefix, string controller, UserRequest userRequest)
+        public async Task<Response<object>> RegisterUserAsync(string urlBase, string servicePrefix, string controller, UserRequest userRequest)
         {
             try
             {
@@ -227,15 +228,153 @@ namespace TravelExpenses.Common.Services
                 string url = $"{servicePrefix}{controller}";
                 HttpResponseMessage response = await client.PostAsync(url, content);
                 string answer = await response.Content.ReadAsStringAsync();
-                Response obj = JsonConvert.DeserializeObject<Response>(answer);
+                Response<object> obj = JsonConvert.DeserializeObject<Response<object>>(answer);
                 return obj;
             }
             catch (Exception ex)
             {
-                return new Response
+                return new Response<object>
                 {
                     IsSuccess = false,
                     Message = ex.Message
+                };
+            }
+        }
+
+        public async Task<Response<object>> GetListAsync<T>(
+            string urlBase,
+            string servicePrefix,
+            string controller,
+            string tokenType,
+            string accessToken)
+        {
+            try
+            {
+                var client = new HttpClient
+                {
+                    BaseAddress = new Uri(urlBase),
+                };
+
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                    tokenType,
+                    accessToken);
+
+                var url = $"{servicePrefix}{controller}";
+                var response = await client.GetAsync(url);
+                var result = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response<object>
+                    {
+                        IsSuccess = false,
+                        Message = result,
+                    };
+                }
+
+                var list = JsonConvert.DeserializeObject<List<T>>(result);
+                return new Response<object>
+                {
+                    IsSuccess = true,
+                    Result = list
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Response<object>
+                {
+                    IsSuccess = false,
+                    Message = ex.Message
+                };
+            }
+        }
+
+        public async Task<Response<object>> PostAsync<T>(
+            string urlBase,
+            string servicePrefix,
+            string controller,
+            T model,
+            string tokenType,
+            string accessToken)
+        {
+            try
+            {
+                var request = JsonConvert.SerializeObject(model);
+                var content = new StringContent(request, Encoding.UTF8, "application/json");
+                var client = new HttpClient
+                {
+                    BaseAddress = new Uri(urlBase)
+                };
+
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(tokenType, accessToken);
+                var url = $"{servicePrefix}{controller}";
+                var response = await client.PostAsync(url, content);
+                var answer = await response.Content.ReadAsStringAsync();
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response<object>
+                    {
+                        IsSuccess = false,
+                        Message = answer,
+                    };
+                }
+
+                return new Response<object>
+                {
+                    IsSuccess = true,
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Response<object>
+                {
+                    IsSuccess = false,
+                    Message = ex.Message,
+                };
+            }
+        }
+
+        public async Task<Response<object>> GetTripAsync(
+            string urlBase,
+            string servicePrefix,
+            string controller,
+            int id,
+            string tokenType,
+            string accessToken)
+        {
+            try
+            {
+                HttpClient client = new HttpClient
+                {
+                    BaseAddress = new Uri(urlBase)
+                };
+
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(tokenType, accessToken);
+                string url = $"{servicePrefix}{controller}/{id}";
+                HttpResponseMessage response = await client.GetAsync(url);
+                string answer = await response.Content.ReadAsStringAsync();
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response<object>
+                    {
+                        IsSuccess = false,
+                        Message = answer,
+                    };
+                }
+
+                TripResponse trip = JsonConvert.DeserializeObject<TripResponse>(answer);
+                return new Response<object>
+                {
+                    IsSuccess = true,
+                    Result = trip,
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Response<object>
+                {
+                    IsSuccess = false,
+                    Message = ex.Message,
                 };
             }
         }

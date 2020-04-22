@@ -16,7 +16,7 @@ namespace TravelExpenses.Web.Helpers
             _configuration = configuration;
         }
 
-        public Response SendMail(string to, string subject, string body)
+        public Response<object> SendMail(string to, string subject, string body)
         {
             try
             {
@@ -43,11 +43,11 @@ namespace TravelExpenses.Web.Helpers
                     client.Disconnect(true);
                 }
 
-                return new Response { IsSuccess = true };
+                return new Response<object> { IsSuccess = true };
             }
             catch (Exception ex)
             {
-                return new Response
+                return new Response<object>
                 {
                     IsSuccess = false,
                     Message = ex.Message,

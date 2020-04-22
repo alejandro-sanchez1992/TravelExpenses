@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Prism.Commands;
 using Prism.Navigation;
@@ -14,36 +11,31 @@ using TravelExpenses.Prism.Views;
 
 namespace TravelExpenses.Prism.ViewModels
 {
-    public class HomePageViewModel : ViewModelBase
+    public class MyTripViewModel : ViewModelBase
     {
         private readonly INavigationService _navigationService;
         private readonly IApiService _apiService;
-        private EmployeeResponse _employee;
-        private ObservableCollection<MyTripItemViewModel> _myTrips;
-        private DelegateCommand _addTripsCommand;
+        private TripResponse _trip;
         private bool _isRunning;
         private bool _isEnabled;
-        private static HomePageViewModel _instance;
+        private DelegateCommand _addExpensesCommand;
 
-        public HomePageViewModel(
+        public MyTripViewModel(
             INavigationService navigationService,
             IApiService apiService) : base(navigationService)
         {
-            _instance = this;
             _navigationService = navigationService;
             _apiService = apiService;
-            Title = "My Trips Page";
+            Title = "Trip";
             IsEnabled = true;
-            //LoadEmployee();
         }
 
-        public DelegateCommand AddTripsCommand => _addTripsCommand ?? (_addTripsCommand = new DelegateCommand(AddTrips));
+        public DelegateCommand AddExpensesCommand => _addExpensesCommand ?? (_addExpensesCommand = new DelegateCommand(AddExpenses));
 
-
-        public ObservableCollection<MyTripItemViewModel> MyTrips
+        public TripResponse Trip
         {
-            get => _myTrips;
-            set => SetProperty(ref _myTrips, value);
+            get => _trip;
+            set => SetProperty(ref _trip, value);
         }
 
         public bool IsRunning
@@ -58,19 +50,20 @@ namespace TravelExpenses.Prism.ViewModels
             set => SetProperty(ref _isEnabled, value);
         }
 
-        public static HomePageViewModel GetInstance()
-        {
-            return _instance;
-        }
-
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
-            _employee = JsonConvert.DeserializeObject<EmployeeResponse>(Settings.Employee);
-            Title = $"Trips of: {_employee.User.FirstName}";
-            LoadTripsAsync(_employee.Id);
+            base.OnNavigatedTo(parameters);
+
+            if (parameters.ContainsKey("trip"))
+            {
+                Trip = parameters.GetValue<TripResponse>("trip");
+            }
+
+            Title = $"Details of Trip: {_trip.Id}";
+            LoadTripAsync(_trip.Id);
         }
 
-        private async void LoadTripsAsync(int id)
+        private async void LoadTripAsync(int id)
         {
             IsRunning = true;
             IsEnabled = false;
@@ -90,10 +83,11 @@ namespace TravelExpenses.Prism.ViewModels
 
             TokenResponse token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
 
-            Response<object> response = await _apiService.GetListAsync<TripResponse>(
+            Response<object> response = await _apiService.GetTripAsync(
                 url,
                 "api",
-                $"/Trips/GetMyTrips/{id}",
+                "/Trips",
+                id,
                 "bearer",
                 token.Token);
 
@@ -109,25 +103,18 @@ namespace TravelExpenses.Prism.ViewModels
                 return;
             }
 
-            MainViewModel.GetInstance().TripsList = (List<TripResponse>)response.Result;
-            MyTrips = new ObservableCollection<MyTripItemViewModel>(ToItemViewModel());
+            TripResponse tripResult = (TripResponse)response.Result;
+            Trip = tripResult;
         }
 
-        private IEnumerable<MyTripItemViewModel> ToItemViewModel()
+        private async void AddExpenses()
         {
-            return MainViewModel.GetInstance().TripsList.Select(l => new MyTripItemViewModel(_navigationService)
+            NavigationParameters parameters = new NavigationParameters
             {
-                Id = l.Id,
-                City = l.City,
-                StartDate = l.StartDateLocal,
-                EndDate = l.EndDateLocal,
-                TripDetails = l.TripDetails
-            });
-        }
+                { "tripId", _trip.Id },
+            };
 
-        private async void AddTrips()
-        {
-            await _navigationService.NavigateAsync("AddTripsPage");
+            await _navigationService.NavigateAsync(nameof(AddExpensePage), parameters);
         }
     }
 }

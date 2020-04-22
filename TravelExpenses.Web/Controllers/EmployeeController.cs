@@ -47,15 +47,41 @@ namespace TravelExpenses.Web.Controllers
                 return NotFound();
             }
 
-            var employee = await _context.Trips
-                .Include(o => o.User)
+            var employee = await _context.Employees
+                .Include(e => e.User)
+                .Include(e => e.Trips)
+                .ThenInclude(e => e.City)
+                .Include(e => e.Trips)
+                .ThenInclude(e => e.TripDetails)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (employee == null)
             {
                 return NotFound();
             }
 
             return View(employee);
+        }
+
+        public async Task<IActionResult> DetailsTrip(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var trip = await _context.Trips
+                .Include(t => t.City)
+                .Include(t => t.TripDetails)
+                .ThenInclude(t => t.Expense)
+                .FirstOrDefaultAsync(o => o.Id == id.Value);
+
+            if (trip == null)
+            {
+                return NotFound();
+            }
+
+            return View(trip);
         }
 
         public IActionResult Create()

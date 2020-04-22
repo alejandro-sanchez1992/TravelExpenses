@@ -22,7 +22,7 @@ namespace TravelExpenses.Prism.ViewModels
         private bool _isRunning;
         private bool _isEnabled;
         private ImageSource _image;
-        private UserResponse _user;
+        private EmployeeResponse _user;
         private MediaFile _file;
         private DelegateCommand _changeImageCommand;
         private DelegateCommand _saveCommand;
@@ -36,8 +36,8 @@ namespace TravelExpenses.Prism.ViewModels
             _apiService = apiService;
             Title = Languages.ModifyUser;
             IsEnabled = true;
-            User = JsonConvert.DeserializeObject<UserResponse>(Settings.User);
-            Image = User.PictureFullPath;
+            Employee = JsonConvert.DeserializeObject<EmployeeResponse>(Settings.Employee);
+            Image = Employee.User.PictureFullPath;
         }
 
         public DelegateCommand ChangePasswordCommand => _changePasswordCommand ?? (_changePasswordCommand = new DelegateCommand(ChangePasswordAsync));
@@ -52,7 +52,7 @@ namespace TravelExpenses.Prism.ViewModels
             set => SetProperty(ref _image, value);
         }
 
-        public UserResponse User
+        public EmployeeResponse Employee
         {
             get => _user;
             set => SetProperty(ref _user, value);
@@ -94,63 +94,63 @@ namespace TravelExpenses.Prism.ViewModels
 
             UserRequest userRequest = new UserRequest
             {
-                Address = User.Address,
-                Document = User.Document,
-                Email = User.Email,
-                FirstName = User.FirstName,
-                LastName = User.LastName,
+                Address = Employee.User.Address,
+                Document = Employee.User.Document,
+                Email = Employee.User.Email,
+                FirstName = Employee.User.FirstName,
+                LastName = Employee.User.LastName,
                 Password = "123456", // It doesn't matter what is sent here. It is only for the model to be valid
-                PhoneNumber = User.PhoneNumber,
+                PhoneNumber = Employee.User.PhoneNumber,
                 PictureArray = imageArray,
-                UserTypeId = User.UserType == UserType.Employee ? 1 : 2,
+                UserTypeId = Employee.User.UserType == UserType.Employee ? 1 : 2,
                 CultureInfo = Languages.Culture
             };
 
             TokenResponse token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
             string url = App.Current.Resources["UrlAPI"].ToString();
-            Response response = await _apiService.PutAsync(url, "/api", "/Account", userRequest, "bearer", token.Token);
+            Response<object> response = await _apiService.PutAsync(url, "/api", "/Account", userRequest, "bearer", token.Token);
 
             IsRunning = false;
             IsEnabled = true;
 
             if (!response.IsSuccess)
             {
-                await App.Current.MainPage.DisplayAlert("Error", response.Message, "Accept");
+                await App.Current.MainPage.DisplayAlert("Error", response.Message, Languages.Accept);
                 return;
             }
 
-            Settings.User = JsonConvert.SerializeObject(User);
+            Settings.Employee = JsonConvert.SerializeObject(Employee);
             MainMasterDetailPageViewModel.GetInstance().ReloadUser();
             await App.Current.MainPage.DisplayAlert(Languages.Ok, Languages.UserUpdated, Languages.Accept);
         }
 
         private async Task<bool> ValidateDataAsync()
         {
-            if (string.IsNullOrEmpty(User.Document))
+            if (string.IsNullOrEmpty(Employee.User.Document))
             {
                 await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.DocumentError, Languages.Accept);
                 return false;
             }
 
-            if (string.IsNullOrEmpty(User.FirstName))
+            if (string.IsNullOrEmpty(Employee.User.FirstName))
             {
                 await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.FirstNameError, Languages.Accept);
                 return false;
             }
 
-            if (string.IsNullOrEmpty(User.LastName))
+            if (string.IsNullOrEmpty(Employee.User.LastName))
             {
                 await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.LastNameError, Languages.Accept);
                 return false;
             }
 
-            if (string.IsNullOrEmpty(User.Address))
+            if (string.IsNullOrEmpty(Employee.User.Address))
             {
                 await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.AddressError, Languages.Accept);
                 return false;
             }
 
-            if (string.IsNullOrEmpty(User.PhoneNumber))
+            if (string.IsNullOrEmpty(Employee.User.PhoneNumber))
             {
                 await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.PhoneError, Languages.Accept);
                 return false;
