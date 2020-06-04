@@ -40,7 +40,7 @@ namespace TravelExpenses.Prism.ViewModels
             _navigationService = navigationService;
             _apiService = apiService;
             _filesHelper = filesHelper;
-            Title = "Add New Expenses";
+            Title = Languages.AddExpense;
             ExpenseDate = DateTime.Today;
             Image = App.Current.Resources["UrlNoImage2"].ToString();
             TripDetail = new TripDetailRequest();
@@ -131,7 +131,7 @@ namespace TravelExpenses.Prism.ViewModels
             {
                 await App.Current.MainPage.DisplayAlert(
                     Languages.Error,
-                    Languages.LoginError,
+                    Languages.Error,
                     Languages.Accept);
                 await _navigationService.GoBackAsync();
                 return;
@@ -209,8 +209,8 @@ namespace TravelExpenses.Prism.ViewModels
                 _file = await CrossMedia.Current.TakePhotoAsync(
                     new StoreCameraMediaOptions
                     {
-                        Directory = "Expense",
-                        Name = "expense.jpg",
+                        Directory = "Sample",
+                        Name = "test.jpg",
                         SaveToAlbum = true,
                         CompressionQuality = 75,
                         CustomPhotoSize = 50,
@@ -238,19 +238,19 @@ namespace TravelExpenses.Prism.ViewModels
         {
             if (string.IsNullOrEmpty(TripDetail.Description))
             {
-                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.DocumentError, Languages.Accept);
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.Error, Languages.Accept);
                 return false;
             }
 
             if (TripDetail.Amount < 1)
             {
-                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.FirstNameError, Languages.Accept);
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.Error, Languages.Accept);
                 return false;
             }
 
             if (_file == null)
             {
-                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.FirstNameError, Languages.Accept);
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.FromGallery, Languages.Accept);
                 return false;
             }
 

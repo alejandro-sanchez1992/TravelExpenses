@@ -15,6 +15,15 @@
     <data name="TaxiHistory" xml:space="preserve">
         <value>Taxi History</value>
     </data>
+    <data name="AddTrip" xml:space="preserve">
+        <value>Add New Trip</value>
+    </data>
+    <data name="AddExpense" xml:space="preserve">
+        <value>Add New Expenses</value>
+    </data>
+    <data name="CityName" xml:space="preserve">
+        <value>Select City</value>
+    </data>
     <data name="Error" xml:space="preserve">
         <value>Error</value>
     </data>

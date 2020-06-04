@@ -85,7 +85,7 @@ namespace TravelExpenses.Web.Controllers.API
             string picturePath = string.Empty;
             if (tripDetailRequest.PictureArray != null && tripDetailRequest.PictureArray.Length > 0)
             {
-                picturePath = _imageHelper.UploadImage(tripDetailRequest.PictureArray, "Expenses");
+                picturePath = _imageHelper.UploadImage(tripDetailRequest.PictureArray, "Users");
             }
 
             TripDetailEntity tripDetailEntity = new TripDetailEntity

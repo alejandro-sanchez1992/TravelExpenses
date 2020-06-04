@@ -20,6 +20,12 @@ namespace TravelExpenses.Prism.Helpers
 
         public static string GeolocationError => Resource.GeolocationError;
 
+        public static string AddTrip => Resource.AddTrip;
+
+        public static string CityName => Resource.CityName;
+
+        public static string AddExpense => Resource.AddExpense;
+
         public static string EndTrip => Resource.EndTrip;
 
         public static string Source => Resource.Source;

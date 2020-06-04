@@ -21,15 +21,6 @@
     <data name="TaxiHistory" xml:space="preserve">
         <value>Historia del taxi</value>
     </data>
-    <data name="AddTrip" xml:space="preserve">
-        <value>Agregar nuevo viaje</value>
-    </data>
-    <data name="AddExpense" xml:space="preserve">
-        <value>Agregar nuevos gastos</value>
-    </data>
-    <data name="CityName" xml:space="preserve">
-        <value>Seleccione Ciudad</value>
-    </data>
     <data name="PlaqueError1" xml:space="preserve">
         <value>Debes entrar en una placa.</value>
     </data>

@@ -22,7 +22,7 @@
             <ScrollView>
                 <StackLayout Padding="20">
                     <Label  HorizontalOptions="CenterAndExpand" 
-                                Text="Add New Expense"
+                                Text="{x:Static resources:Resource.AddExpense}"
                                 FontAttributes="Bold"
                                 FontSize="32"
                                 Margin="0,0,0,20"/>
@@ -58,7 +58,7 @@
                             ImageHeight="24"
                             Image="ic_dni"
                             Keyboard="Numeric"
-                            Placeholder="{x:Static resources:Resource.DocumentPlaceHolder}"
+                            Placeholder="Value"
                             Text="{Binding TripDetail.Amount}"
                             HorizontalOptions="FillAndExpand"/>
 

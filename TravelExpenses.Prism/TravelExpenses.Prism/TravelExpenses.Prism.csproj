@@ -57,6 +57,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.es.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Resources.ne.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.ne.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Resources\Resource.Designer.cs">
@@ -64,6 +68,9 @@
     </Compile>
     <Compile Update="Resources\Resource.es.Designer.cs">
       <DependentUpon>Resource.es.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Resources.ne.Designer.cs">
+      <DependentUpon>Resources.ne.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>

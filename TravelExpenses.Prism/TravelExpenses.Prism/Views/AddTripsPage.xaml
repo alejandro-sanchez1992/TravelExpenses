@@ -20,7 +20,7 @@
             <ScrollView>
                 <StackLayout Padding="20">
                     <Label  HorizontalOptions="CenterAndExpand" 
-                                Text="Add New Trip"
+                                Text="{x:Static resources:Resource.AddTrip}"
                                 FontAttributes="Bold"
                                 FontSize="32"
                                 Margin="0,0,0,20"/>

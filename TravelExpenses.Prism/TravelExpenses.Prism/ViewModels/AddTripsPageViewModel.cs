@@ -32,7 +32,7 @@ namespace TravelExpenses.Prism.ViewModels
         {
             _navigationService = navigationService;
             _apiService = apiService;
-            Title = Languages.Register;
+            Title = Languages.AddTrip;
             StartDate = DateTime.Today;
             EndDate = DateTime.Today;
             IsEnabled = true;
@@ -133,7 +133,7 @@ namespace TravelExpenses.Prism.ViewModels
             {
                 await App.Current.MainPage.DisplayAlert(
                     Languages.Error,
-                    Languages.LoginError,
+                    Languages.Error,
                     Languages.Accept);
                 await _navigationService.GoBackAsync();
                 return;
@@ -174,7 +174,7 @@ namespace TravelExpenses.Prism.ViewModels
             {
                 await App.Current.MainPage.DisplayAlert(
                     Languages.Error,
-                    Languages.LoginError,
+                    Languages.Error,
                     Languages.Accept);
                 await _navigationService.GoBackAsync();
                 return;
@@ -233,7 +233,7 @@ namespace TravelExpenses.Prism.ViewModels
         {
             if (string.IsNullOrEmpty(City.Name))
             {
-                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.StartDate, Languages.Accept);
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.CityName, Languages.Accept);
                 return false;
             }
 
